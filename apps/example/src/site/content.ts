@@ -2,115 +2,91 @@ export const REPO_URL = "https://github.com/codyrobertson/cyanium-design-system"
 export const RELEASE_URL = "https://github.com/codyrobertson/cyanium-design-system/releases/tag/v0.1.0";
 
 export const siteStats = [
-  { num: "36", label: "UI primitives" },
-  { num: "3", label: "Product kits" },
-  { num: "v0.1.0", label: "Latest release" },
-  { num: "MIT", label: "Open source" },
+  { num: "36", label: "primitives" },
+  { num: "3", label: "kits" },
+  { num: "0.1.0", label: "release" },
 ] as const;
 
-export const siteFeatures = [
+export const packages = [
   {
-    title: "@cyanium/tokens",
-    description: "Semantic CSS variables, typography, shadows, and a Tailwind v4 theme bridge.",
+    name: "@cyanium/tokens",
+    blurb: "CSS variables + Tailwind v4 theme",
   },
   {
-    title: "@cyanium/ui",
-    description: "shadcn-style Radix primitives — Button, Input, Dialog, DataTable, and 30+ more.",
+    name: "@cyanium/ui",
+    blurb: "Radix primitives, shadcn composition",
   },
   {
-    title: "@cyanium/kits",
-    description: "Finance dashboard, marketing landing, and AI chat templates with explicit props.",
+    name: "@cyanium/kits",
+    blurb: "Finance, landing, AI — explicit props",
   },
   {
-    title: "shadcn registry",
-    description: "Copy components into your app via registry/cyanium.json with CI drift guard.",
+    name: "registry",
+    blurb: "Copy UI into your repo via shadcn CLI",
   },
 ] as const;
 
-export const installPaths = [
+export const installTabs = [
   {
-    name: "npm packages",
-    description: "Install published scoped packages",
-    price: "pnpm",
-    cta: "Install",
-    featured: true,
-    badge: "Recommended",
-    features: [
-      { label: "@cyanium/tokens" },
-      { label: "@cyanium/ui" },
-      { label: "@cyanium/kits" },
-      { label: "Requires @cyanium npm org", muted: true },
-    ],
+    id: "npm",
+    label: "Packages",
     command: "pnpm add @cyanium/ui @cyanium/tokens @cyanium/kits",
   },
   {
-    name: "shadcn registry",
-    description: "Copy primitives into your codebase",
-    price: "npx",
-    cta: "Add components",
-    features: [
-      { label: "UI primitives only" },
-      { label: "Own the source" },
-      { label: "Tailwind + Radix" },
-      { label: "Kits stay npm-only", muted: true },
-    ],
+    id: "registry",
+    label: "Registry",
     command: "npx shadcn@latest add ./registry/cyanium.json",
   },
   {
-    name: "Clone monorepo",
-    description: "Full dev environment with Storybook",
-    price: "git",
-    cta: "View repo",
-    features: [
-      { label: "Storybook docs" },
-      { label: "Example app (this page)" },
-      { label: "Turbo + pnpm workspace" },
-      { label: "CI + changesets" },
-    ],
+    id: "clone",
+    label: "Monorepo",
     command: "git clone https://github.com/codyrobertson/cyanium-design-system.git",
   },
 ] as const;
 
+export type InstallTabId = (typeof installTabs)[number]["id"];
+
 export const liveKits = [
   {
     id: "finance" as const,
-    label: "Finance dashboard",
-    url: "cyanium.dev/finance",
-    description: "Apex banking shell with cards, budget chart, spending, and transactions.",
+    label: "Finance",
+    tag: "Dashboard",
+    description: "Cards, budget chart, spending, transactions.",
+    accent: "from-[#fff7ed] to-[#ffedd5]",
+    bar: "bg-[var(--brand-orange)]",
   },
   {
     id: "ai" as const,
-    label: "AI chat",
-    url: "cyanium.dev/chat",
-    description: "Sidebar, message thread, model picker, and composer — all prop-driven.",
+    label: "AI Chat",
+    tag: "Assistant",
+    description: "Sidebar, thread, model picker, composer.",
+    accent: "from-[#eef2ff] to-[#e0e7ff]",
+    bar: "bg-[var(--blue-500)]",
   },
   {
     id: "landing" as const,
-    label: "Landing kit",
-    url: "cyanium.dev/landing",
-    description: "Marketing page template with hero, pricing, FAQ, and testimonials.",
+    label: "Landing",
+    tag: "Marketing",
+    description: "Hero, pricing, FAQ, testimonials.",
+    accent: "from-[#ecfeff] to-[#cffafe]",
+    bar: "bg-[var(--sky-500,#0ea5e9)]",
   },
 ];
 
 export const siteFaq = [
   {
     value: "1",
-    question: "What is Cyanium?",
-    answer: "A production design system with semantic tokens, shadcn/Radix UI primitives, and product kits in a pnpm monorepo.",
+    question: "What ships in the box?",
+    answer: "Tokens, UI primitives, three product kits, Storybook, fixture builders, and a shadcn registry with CI drift checks.",
   },
   {
     value: "2",
-    question: "How do I try the kits live?",
-    answer: "Use the Live kits section on this page or run pnpm example from the repo. Each kit has Demo and Integration modes.",
+    question: "How do live demos work?",
+    answer: "Click a kit below — it mounts in this app. Toggle Demo vs Integration to compare *Demo wrappers with build*AppProps() wiring.",
   },
   {
     value: "3",
-    question: "Is this the same as copying shadcn components?",
-    answer: "Similar composition model, styled with Cyanium tokens and extended with patterns, fixtures, and full product templates.",
-  },
-  {
-    value: "4",
-    question: "Where is the source?",
-    answer: "https://github.com/codyrobertson/cyanium-design-system — MIT licensed, with Storybook and an example Vite app.",
+    question: "Can I copy components only?",
+    answer: "Yes. Use the shadcn registry for primitives. Kits stay npm packages — they depend on patterns and fixtures.",
   },
 ] as const;

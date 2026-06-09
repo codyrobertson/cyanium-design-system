@@ -1,0 +1,76 @@
+/* Scoped atmosphere for the example marketing page */
+
+.site-root {
+  --site-ink: rgb(15, 23, 42);
+  --site-glow: rgba(59, 130, 246, 0.35);
+}
+
+.site-hero-bg {
+  background-color: #0b1120;
+  background-color: var(--site-ink);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 70% -10%, var(--site-glow), transparent 55%),
+    radial-gradient(circle at 12% 88%, rgba(6, 182, 212, 0.18), transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: auto, auto, 48px 48px, 48px 48px;
+}
+
+.site-hero-fade {
+  background: linear-gradient(to bottom, transparent 0%, var(--bg-white) 100%);
+}
+
+.site-demo-float {
+  animation: site-float 6s ease-in-out infinite;
+}
+
+@keyframes site-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.site-reveal {
+  animation: site-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.site-reveal-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.site-reveal-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.site-reveal-delay-3 {
+  animation-delay: 0.24s;
+}
+
+@keyframes site-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-kit-thumb {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.site-kit-thumb:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -20px rgba(15, 23, 42, 0.25);
+}
+
+.site-code {
+  font-family: var(--font-mono);
+  tab-size: 2;
+}
