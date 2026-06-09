@@ -93,6 +93,8 @@ pnpm check:registry     # verify committed registry matches source
 
 ## Deploy (example app)
 
+**Live demo:** https://cyanium-design-system.vercel.app
+
 The repo landing page and live kit previews live in `apps/example`. One-command deploy with Vercel:
 
 ```bash
