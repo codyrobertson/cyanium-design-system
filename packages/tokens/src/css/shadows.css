@@ -1,0 +1,38 @@
+/* AlignUI — Shadow & effect system.
+   AlignUI shadows are extremely subtle, low-opacity and warm-tinted.
+   Three families:
+     • regular  — surfaces, dropdowns, popovers, modals (elevation)
+     • component — inset/keyline shadows baked into buttons, toggles, inputs
+     • colored  — focus rings + tinted glows on primary/state buttons */
+
+:root {
+  /* ---- Regular elevation ---------------------------------------------- */
+  --shadow-regular-xs: 0 1px 2px 0 rgba(10, 13, 20, 0.03);
+  --shadow-regular-sm: 0 2px 4px 0 rgba(27, 28, 29, 0.04);
+  --shadow-regular-md: 0 16px 32px -12px rgba(14, 18, 27, 0.10);
+
+  /* ---- Surface / card keyline + lift ----------------------------------- */
+  --shadow-card:
+    0 20px 20px -10px rgba(26, 26, 26, 0.04),
+    0 10px 10px -5px rgba(26, 26, 26, 0.04),
+    0 6px 6px -3px rgba(26, 26, 26, 0.04),
+    0 3px 3px -1.5px rgba(26, 26, 26, 0.04),
+    0 1px 1px -0.5px rgba(26, 26, 26, 0.04);
+
+  /* ---- Component (baked-in) shadows ------------------------------------ */
+  /* neutral button / select / input resting shadow */
+  --shadow-button:
+    inset 0 -1px 1px -0.5px rgba(51, 51, 51, 0.06),
+    0 0 0 1px rgba(51, 51, 51, 0.04),
+    0 1px 1px 0.5px rgba(51, 51, 51, 0.04),
+    0 3px 3px -1.5px rgba(51, 51, 51, 0.02),
+    0 6px 6px -3px rgba(51, 51, 51, 0.02);
+  --shadow-toggle:
+    0 6px 10px 0 rgba(14, 18, 27, 0.06),
+    0 2px 4px 0 rgba(14, 18, 27, 0.03);
+
+  /* ---- Focus rings (primary + state) ----------------------------------- */
+  --shadow-focus-primary: 0 0 0 2px var(--bg-white-0), 0 0 0 4px var(--alpha-primary-alpha-24);
+  --shadow-focus-neutral: 0 0 0 2px var(--bg-white-0), 0 0 0 4px var(--alpha-gray-alpha-16);
+  --shadow-focus-error:   0 0 0 2px var(--bg-white-0), 0 0 0 4px var(--alpha-red-alpha-16);
+}

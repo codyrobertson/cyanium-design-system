@@ -1,0 +1,9 @@
+/* AlignUI — Webfonts
+   Primary UI: Inter (Rasmus Andersson)
+   Display/titles: Inter Display — the large-optical-size cut of Inter.
+     Google Fonts ships Inter as a variable font with an optical-size (opsz)
+     axis, so we load Inter once and let `font-optical-sizing: auto` provide
+     the Display behaviour at large sizes. (Substitution flagged in README.)
+   Mono: DM Mono (Colophon / Google Fonts). */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=DM+Mono:wght@400;500&display=swap');

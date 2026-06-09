@@ -1,0 +1,34 @@
+/* AlignUI — base layer. A light reset + sensible element defaults so any
+   surface that links styles.css inherits the AlignUI look automatically. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--paragraph-sm-size);
+  line-height: var(--paragraph-sm-line);
+  letter-spacing: var(--paragraph-sm-track);
+  color: var(--text-strong-950);
+  background-color: var(--bg-white-0);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+h1, h2, h3, h4, h5, h6 { margin: 0; font-family: var(--font-display); font-weight: 500; color: var(--text-strong-950); }
+p { margin: 0; }
+
+a { color: var(--primary-base); text-decoration: none; }
+
+button { font-family: inherit; }
+
+::selection { background: var(--alpha-primary-alpha-16); }
+
+/* Thin AlignUI-style scrollbar */
+* { scrollbar-width: thin; scrollbar-color: var(--bg-soft-200) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--bg-soft-200); border-radius: 999px; }
+*::-webkit-scrollbar-track { background: transparent; }

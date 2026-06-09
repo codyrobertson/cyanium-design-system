@@ -1,0 +1,15 @@
+{
+  "name": "@cyanium/tokens",
+  "version": "0.1.0",
+  "description": "Cyanium design tokens — AlignUI foundations as CSS variables + Tailwind theme",
+  "type": "module",
+  "exports": {
+    "./css": "./src/index.css",
+    "./tailwind": "./src/tailwind.css"
+  },
+  "files": ["src"],
+  "scripts": {
+    "build": "echo 'tokens: CSS-only package'",
+    "typecheck": "echo 'tokens: no TS'"
+  }
+}

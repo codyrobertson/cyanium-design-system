@@ -1,0 +1,9 @@
+/* Cyanium Design System — token entry point.
+   Imports AlignUI foundations in dependency order. */
+
+@import "./css/fonts.css";
+@import "./css/fig-tokens.css";
+@import "./css/foundations.css";
+@import "./css/typography.css";
+@import "./css/shadows.css";
+@import "./css/base.css";

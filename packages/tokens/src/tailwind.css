@@ -1,0 +1,121 @@
+/* Tailwind v4 theme bridge — maps AlignUI semantic tokens to utility classes.
+   Import after @cyanium/tokens/css in your app stylesheet. */
+
+@theme inline {
+  /* ---- shadcn-compatible aliases ---------------------------------------- */
+  --color-background: var(--bg-white-0);
+  --color-foreground: var(--text-strong-950);
+  --color-card: var(--bg-white-0);
+  --color-card-foreground: var(--text-strong-950);
+  --color-popover: var(--bg-white-0);
+  --color-popover-foreground: var(--text-strong-950);
+  --color-primary: var(--primary-base);
+  --color-primary-foreground: var(--static-static-white);
+  --color-secondary: var(--bg-weak-50);
+  --color-secondary-foreground: var(--text-sub-600);
+  --color-muted: var(--bg-weak-50);
+  --color-muted-foreground: var(--text-sub-600);
+  --color-accent: var(--primary-lighter);
+  --color-accent-foreground: var(--primary-base);
+  --color-destructive: var(--state-error-base);
+  --color-destructive-foreground: var(--static-static-white);
+  --color-border: var(--stroke-soft-200);
+  --color-input: var(--stroke-soft-200);
+  --color-ring: var(--alpha-primary-alpha-24);
+
+  /* ---- AlignUI semantic surfaces ---------------------------------------- */
+  --color-bg-white: var(--bg-white-0);
+  --color-bg-weak: var(--bg-weak-50);
+  --color-bg-soft: var(--bg-soft-200);
+  --color-bg-sub: var(--bg-sub-300);
+  --color-bg-surface: var(--bg-surface-800);
+  --color-bg-strong: var(--bg-strong-950);
+
+  --color-text-strong: var(--text-strong-950);
+  --color-text-sub: var(--text-sub-600);
+  --color-text-soft: var(--text-soft-400);
+  --color-text-disabled: var(--text-disabled-300);
+  --color-text-white: var(--text-white-0);
+
+  --color-stroke-soft: var(--stroke-soft-200);
+  --color-stroke-sub: var(--stroke-sub-300);
+  --color-stroke-strong: var(--stroke-strong-950);
+
+  --color-icon-sub: var(--icon-sub-600);
+  --color-icon-soft: var(--icon-soft-400);
+  --color-icon-strong: var(--icon-strong-950);
+
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-primary-lighter: var(--primary-lighter);
+
+  /* ---- State colors ----------------------------------------------------- */
+  --color-success: var(--state-success-base);
+  --color-success-lighter: var(--state-success-lighter);
+  --color-error: var(--state-error-base);
+  --color-error-lighter: var(--state-error-lighter);
+  --color-warning: var(--state-warning-base);
+  --color-warning-lighter: var(--state-warning-lighter);
+  --color-info: var(--state-information-base);
+  --color-info-lighter: var(--state-information-lighter);
+
+  /* ---- Spacing (AlignUI 4px grid) --------------------------------------- */
+  --spacing-0: var(--spacing-0);
+  --spacing-0\.5: var(--spacing-2);
+  --spacing-1: var(--spacing-4);
+  --spacing-1\.5: var(--spacing-6);
+  --spacing-2: var(--spacing-8);
+  --spacing-2\.5: var(--spacing-10);
+  --spacing-3: var(--spacing-12);
+  --spacing-3\.5: var(--spacing-14);
+  --spacing-4: var(--spacing-16);
+  --spacing-5: var(--spacing-20);
+  --spacing-6: var(--spacing-24);
+  --spacing-8: var(--spacing-32);
+  --spacing-10: var(--spacing-40);
+  --spacing-12: var(--spacing-48);
+  --spacing-14: var(--spacing-56);
+  --spacing-16: var(--spacing-64);
+
+  /* ---- Radius ----------------------------------------------------------- */
+  --radius-sm: var(--radius-6);
+  --radius-md: var(--radius-8);
+  --radius-lg: var(--radius-10);
+  --radius-xl: var(--radius-12);
+  --radius-2xl: var(--radius-16);
+  --radius-3xl: var(--radius-20);
+  --radius-full: var(--radius-full);
+  --radius-button: var(--radius-button);
+  --radius-card: var(--radius-card);
+  --radius-input: var(--radius-input);
+
+  /* ---- Typography ------------------------------------------------------- */
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  --text-xs: var(--paragraph-xs-size);
+  --text-xs--line-height: var(--paragraph-xs-line);
+  --text-sm: var(--paragraph-sm-size);
+  --text-sm--line-height: var(--paragraph-sm-line);
+  --text-base: var(--paragraph-md-size);
+  --text-base--line-height: var(--paragraph-md-line);
+  --text-lg: var(--paragraph-lg-size);
+  --text-lg--line-height: var(--paragraph-lg-line);
+
+  /* ---- Shadows ---------------------------------------------------------- */
+  --shadow-xs: var(--shadow-regular-xs);
+  --shadow-sm: var(--shadow-regular-sm);
+  --shadow-md: var(--shadow-regular-md);
+  --shadow-card: var(--shadow-card);
+  --shadow-button: var(--shadow-button);
+  --shadow-focus-primary: var(--shadow-focus-primary);
+  --shadow-focus-neutral: var(--shadow-focus-neutral);
+  --shadow-focus-error: var(--shadow-focus-error);
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 150ms;
+  --duration-slow: 180ms;
+}

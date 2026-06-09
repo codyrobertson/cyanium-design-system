@@ -1,0 +1,53 @@
+/* AlignUI — Foundations: spacing, radius, font families, type scale.
+   Color primitives + semantic color aliases live in fig-tokens.css.
+   NOTE: this file intentionally redefines --radius-* / --spacing-* from the
+   raw Figma variables (which are unitless floats) as real px lengths, so
+   hand-authored components can use them directly as var(--radius-8). */
+
+:root {
+  /* ---- Font families ---------------------------------------------------- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---- Spacing scale (px) ---------------------------------------------- */
+  --spacing-0: 0px;
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+
+  /* ---- Corner radius (px) ---------------------------------------------- */
+  --radius-0: 0px;
+  --radius-2: 2px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-28: 28px;
+  --radius-full: 999px;
+
+  /* Component-friendly radius aliases */
+  --radius-button: 10px;   /* default control radius */
+  --radius-card: 16px;     /* surface / card radius   */
+  --radius-input: 10px;
+
+  /* ---- Brand --------------------------------------------------------- */
+  --brand-orange: rgb(240, 80, 35);   /* AlignUI logomark badge */
+  --brand-orange-ring: rgb(229, 63, 16);
+}
