@@ -1,4 +1,4 @@
-/* AlignUI — Foundations: spacing, radius, font families, type scale.
+/* Cyanium — Foundations: spacing, radius, font families, type scale.
    Color primitives + semantic color aliases live in fig-tokens.css.
    NOTE: this file intentionally redefines --radius-* / --spacing-* from the
    raw Figma variables (which are unitless floats) as real px lengths, so
@@ -48,6 +48,6 @@
   --radius-input: 10px;
 
   /* ---- Brand --------------------------------------------------------- */
-  --brand-orange: rgb(240, 80, 35);   /* AlignUI logomark badge */
+  --brand-orange: rgb(240, 80, 35);   /* Cyanium logomark badge */
   --brand-orange-ring: rgb(229, 63, 16);
 }

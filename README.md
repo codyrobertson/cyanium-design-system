@@ -1,12 +1,12 @@
 # Cyanium Design System
 
-Production-grade React design system ported from **AlignUI**, built on **Radix UI + Tailwind v4 + CVA** in the shadcn/ui composition style.
+Production-grade React design system built on **Radix UI + Tailwind v4 + CVA** in the shadcn/ui composition style.
 
 ## Packages
 
 | Package | Description |
 |---------|-------------|
-| `@cyanium/tokens` | AlignUI CSS variables + Tailwind `@theme` bridge |
+| `@cyanium/tokens` | Semantic CSS variables + Tailwind `@theme` bridge |
 | `@cyanium/ui` | shadcn-style **primitives only** (`components/ui/*`) |
 | `@cyanium/kits` | Product templates — finance, landing, AI |
 | `@cyanium/kits/patterns` | Dashboard chrome, stat cards, nav items (not primitives) |
@@ -83,7 +83,7 @@ packages/kits/src/fixtures/      # demo data
 ```bash
 pnpm install && pnpm build
 pnpm storybook          # http://localhost:6006
-pnpm example            # http://localhost:5173
+pnpm example            # http://localhost:5173 — repo landing + live kit previews
 pnpm typecheck && pnpm lint && pnpm test
 pnpm build:registry     # refresh registry/cyanium.json
 pnpm check:registry     # verify committed registry matches source

@@ -1,4 +1,4 @@
-/* Tailwind v4 theme bridge — maps AlignUI semantic tokens to utility classes.
+/* Tailwind v4 theme bridge — maps Cyanium semantic tokens to utility classes.
    Import after @cyanium/tokens/css in your app stylesheet. */
 
 @theme inline {
@@ -23,7 +23,7 @@
   --color-input: var(--stroke-soft-200);
   --color-ring: var(--alpha-primary-alpha-24);
 
-  /* ---- AlignUI semantic surfaces ---------------------------------------- */
+  /* ---- Cyanium semantic surfaces ---------------------------------------- */
   --color-bg-white: var(--bg-white-0);
   --color-bg-weak: var(--bg-weak-50);
   --color-bg-soft: var(--bg-soft-200);
@@ -59,7 +59,7 @@
   --color-info: var(--state-information-base);
   --color-info-lighter: var(--state-information-lighter);
 
-  /* ---- Spacing (AlignUI 4px grid) --------------------------------------- */
+  /* ---- Spacing (4px grid) ----------------------------------------------- */
   --spacing-0: var(--spacing-0);
   --spacing-0\.5: var(--spacing-2);
   --spacing-1: var(--spacing-4);

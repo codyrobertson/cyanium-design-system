@@ -8,7 +8,7 @@ Initial public release.
 
 ### @cyanium/tokens
 
-- AlignUI CSS variables, typography, shadows, and Tailwind v4 theme bridge
+- Semantic CSS variables, typography, shadows, and Tailwind v4 theme bridge
 
 ### @cyanium/ui
 

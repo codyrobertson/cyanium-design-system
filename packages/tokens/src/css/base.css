@@ -1,5 +1,5 @@
-/* AlignUI — base layer. A light reset + sensible element defaults so any
-   surface that links styles.css inherits the AlignUI look automatically. */
+/* Cyanium — base layer. A light reset + sensible element defaults so any
+   surface that links styles.css inherits the Cyanium look automatically. */
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -27,7 +27,7 @@ button { font-family: inherit; }
 
 ::selection { background: var(--alpha-primary-alpha-16); }
 
-/* Thin AlignUI-style scrollbar */
+/* Thin Cyanium-style scrollbar */
 * { scrollbar-width: thin; scrollbar-color: var(--bg-soft-200) transparent; }
 *::-webkit-scrollbar { width: 8px; height: 8px; }
 *::-webkit-scrollbar-thumb { background: var(--bg-soft-200); border-radius: 999px; }

@@ -9,8 +9,8 @@ export default meta;
 export const AccordionDemo: StoryObj = {
   render: () => (
     <FaqList items={[
-      { value: "a", question: "What is Cyanium?", answer: "An AlignUI-based design system for React." },
-      { value: "b", question: "Radix or native?", answer: "Radix primitives with AlignUI tokens." },
+      { value: "a", question: "What is Cyanium?", answer: "A production design system for React." },
+      { value: "b", question: "Radix or native?", answer: "Radix primitives with Cyanium tokens." },
     ]} />
   ),
 };

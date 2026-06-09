@@ -27,7 +27,7 @@ export const financeBrand = {
 
 export const financeUser = {
   name: "Sophia Williams",
-  email: "sophia@align.ui",
+  email: "sophia@cyanium.dev",
   avatarColor: "orange" as const,
 };
 

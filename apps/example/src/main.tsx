@@ -12,14 +12,23 @@ import {
   buildLandingPageProps,
 } from "@cyanium/kits/fixtures";
 import { ToasterProvider, Button } from "@cyanium/ui";
+import { CyaniumSite, type KitView } from "./site/cyanium-site";
 import "./index.css";
 
-type View = "finance" | "landing" | "ai";
+type View = "home" | KitView;
 type Mode = "demo" | "integration";
 
 function App() {
-  const [view, setView] = useState<View>("finance");
+  const [view, setView] = useState<View>("home");
   const [mode, setMode] = useState<Mode>("demo");
+
+  if (view === "home") {
+    return (
+      <ToasterProvider>
+        <CyaniumSite onExploreKit={(kit) => setView(kit)} />
+      </ToasterProvider>
+    );
+  }
 
   const content = {
     finance: mode === "demo" ? <FinanceAppDemo /> : <FinanceApp {...buildFinanceAppProps()} />,
@@ -30,6 +39,9 @@ function App() {
   return (
     <ToasterProvider>
       <div className="fixed left-4 top-4 z-50 flex flex-col gap-2">
+        <Button size="small" variant="stroke" onClick={() => setView("home")}>
+          ← Cyanium home
+        </Button>
         <div className="flex gap-2">
           <Button size="small" variant={view === "finance" ? "filled" : "stroke"} onClick={() => setView("finance")}>Finance</Button>
           <Button size="small" variant={view === "landing" ? "filled" : "stroke"} onClick={() => setView("landing")}>Landing</Button>

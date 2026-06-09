@@ -1,7 +1,7 @@
 {
   "name": "@cyanium/tokens",
   "version": "0.1.0",
-  "description": "Cyanium design tokens — AlignUI foundations as CSS variables + Tailwind theme",
+  "description": "Cyanium design tokens — semantic foundations as CSS variables + Tailwind theme",
   "license": "MIT",
   "repository": {
     "type": "git",

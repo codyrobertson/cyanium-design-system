@@ -1,7 +1,7 @@
 {
   "name": "@cyanium/ui",
   "version": "0.1.0",
-  "description": "Cyanium UI — shadcn-compatible AlignUI React components on Radix primitives",
+  "description": "Cyanium UI — shadcn-compatible React components on Radix primitives",
   "license": "MIT",
   "repository": {
     "type": "git",

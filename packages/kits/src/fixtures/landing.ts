@@ -15,7 +15,7 @@ export const landingStats = [
 ];
 
 export const landingFeatures = [
-  { icon: "sparkles", title: "Design tokens", description: "Semantic colors, typography, and shadows from AlignUI.", link: "Learn more" },
+  { icon: "sparkles", title: "Design tokens", description: "Semantic colors, typography, and shadows from Cyanium.", link: "Learn more" },
   { icon: "zap", title: "Fast to adopt", description: "shadcn-style composition with Radix primitives.", link: "Learn more" },
   { icon: "shield", title: "Accessible", description: "Keyboard, focus, and ARIA patterns built in.", link: "Learn more" },
   { icon: "chart", title: "Product kits", description: "Dashboard, landing, and chat templates included.", link: "Learn more" },
@@ -52,7 +52,7 @@ export const landingPricing = [
 export const landingTestimonials = [
   { quote: "We shipped our finance dashboard in a week.", name: "Sarah Chen", role: "PM, NovaPay" },
   { quote: "The token system saved us months of design debt.", name: "Marcus Lee", role: "Design Lead, Stackline", featured: true },
-  { quote: "Radix + AlignUI is the combo we needed.", name: "Elena Ruiz", role: "Engineer, Flowbase" },
+  { quote: "Radix + Cyanium is the combo we needed.", name: "Elena Ruiz", role: "Engineer, Flowbase" },
 ];
 
 export const landingGallery = [
@@ -65,7 +65,7 @@ export const landingBrandName = "Helm";
 export const landingHero = {
   eyebrow: "Now in public beta",
   title: "Ship product UI your team actually wants to use",
-  subtitle: "Helm combines AlignUI tokens, Radix accessibility, and production-ready kits so you can launch faster.",
+  subtitle: "Helm combines Cyanium tokens, Radix accessibility, and production-ready kits so you can launch faster.",
   primaryCta: "Start building",
   secondaryCta: "View docs",
   screenshotLabel: "Product screenshot",

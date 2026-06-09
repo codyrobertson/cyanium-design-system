@@ -66,7 +66,7 @@ export const Typography: StoryObj = {
   render: () => (
     <div className="flex flex-col gap-2">
       <Heading level="h4">Display Heading</Heading>
-      <Text size="md">Body paragraph with AlignUI tone.</Text>
+      <Text size="md">Body paragraph with Cyanium tone.</Text>
       <Subheading size="xs">Stat Label</Subheading>
     </div>
   ),

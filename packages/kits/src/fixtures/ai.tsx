@@ -6,7 +6,7 @@ export const aiModels = ["GPT-4", "GPT-4o", "Claude 3.5"] as const;
 
 export const aiUser = {
   name: "James Brown",
-  email: "james@align.ui",
+  email: "james@cyanium.dev",
   badge: "PRO",
   avatarColor: "green" as const,
 };
