@@ -89,6 +89,26 @@ pnpm build:registry     # refresh registry/cyanium.json
 pnpm check:registry     # verify committed registry matches source
 ```
 
+## Releases
+
+Published packages: `@cyanium/tokens`, `@cyanium/ui`, `@cyanium/kits`.
+
+**GitHub:** [Releases](https://github.com/codyrobertson/cyanium-design-system/releases) · **npm:** scoped under `@cyanium`.
+
+### Maintainer setup (one-time)
+
+1. Create the [`@cyanium` npm organization](https://www.npmjs.com/org/create) (required for scoped publishes).
+2. Add repo secret `NPM_TOKEN` — an npm automation token with publish access to `@cyanium`.
+3. Merge changes via PR; when you land changesets on `main`, the Release workflow opens a **Version packages** PR or publishes when that PR merges.
+
+### Shipping a change
+
+```bash
+pnpm changeset          # describe the change; pick affected packages
+git add .changeset && git commit -m "chore: add changeset"
+# merge PR → Release workflow handles version bump + npm publish + GitHub release
+```
+
 ## Compose primitives
 
 ```tsx

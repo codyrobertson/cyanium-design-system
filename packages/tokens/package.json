@@ -2,6 +2,15 @@
   "name": "@cyanium/tokens",
   "version": "0.1.0",
   "description": "Cyanium design tokens — AlignUI foundations as CSS variables + Tailwind theme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codyrobertson/cyanium-design-system.git",
+    "directory": "packages/tokens"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "exports": {
     "./css": "./src/index.css",

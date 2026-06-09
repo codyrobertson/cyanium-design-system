@@ -1,6 +1,15 @@
 {
   "name": "cyanium-design-system",
   "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codyrobertson/cyanium-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codyrobertson/cyanium-design-system/issues"
+  },
+  "homepage": "https://github.com/codyrobertson/cyanium-design-system#readme",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
