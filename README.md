@@ -84,10 +84,23 @@ packages/kits/src/fixtures/      # demo data
 pnpm install && pnpm build
 pnpm storybook          # http://localhost:6006
 pnpm example            # http://localhost:5173 — repo landing + live kit previews
+pnpm example:build      # production build for apps/example
+pnpm example:preview    # serve the production build locally
 pnpm typecheck && pnpm lint && pnpm test
 pnpm build:registry     # refresh registry/cyanium.json
 pnpm check:registry     # verify committed registry matches source
 ```
+
+## Deploy (example app)
+
+The repo landing page and live kit previews live in `apps/example`. One-command deploy with Vercel:
+
+```bash
+pnpm install && pnpm example:build
+vercel --prod
+```
+
+`vercel.json` at the repo root builds `apps/example` via Turbo and serves the Vite SPA from `apps/example/dist`.
 
 ## Releases
 

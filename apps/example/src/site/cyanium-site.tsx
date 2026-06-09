@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ArrowRight,
   BarChart3,
@@ -5,8 +6,10 @@ import {
   ExternalLink,
   Github,
   Layers,
+  Menu,
   Package,
   Sparkles,
+  X,
   Zap,
 } from "lucide-react";
 import {
@@ -45,35 +48,92 @@ export interface CyaniumSiteProps {
 
 const featureIcons = [Sparkles, Zap, Layers, Package] as const;
 
+const navLinks = [
+  { href: "#features", label: "Features" },
+  { href: "#kits", label: "Live kits" },
+  { href: "#install", label: "Install" },
+  { href: "#faq", label: "FAQ" },
+] as const;
+
 export function CyaniumSite({ onExploreKit }: CyaniumSiteProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const scrollTo = (href: string) => {
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
+
   return (
     <MarketingShell>
-      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-stroke-soft bg-bg-white/90 px-6 py-4 backdrop-blur-md">
-        <Wordmark name="Cyanium" />
-        <nav className="hidden items-center gap-8 text-sm font-medium text-text-sub md:flex">
-          <a href="#features" className="hover:text-text-strong">Features</a>
-          <a href="#kits" className="hover:text-text-strong">Live kits</a>
-          <a href="#install" className="hover:text-text-strong">Install</a>
-          <a href="#faq" className="hover:text-text-strong">FAQ</a>
-        </nav>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            intent="neutral"
-            size="small"
-            leadingIcon={<Github className="size-4" />}
-            onClick={() => window.open(REPO_URL, "_blank", "noopener")}
-          >
-            GitHub
-          </Button>
-          <Button
-            size="small"
-            trailingIcon={<ExternalLink className="size-4" />}
-            onClick={() => window.open(RELEASE_URL, "_blank", "noopener")}
-          >
-            v0.1.0
-          </Button>
+      <header className="sticky top-0 z-20 border-b border-stroke-soft bg-bg-white/90 backdrop-blur-md">
+        <div className="flex items-center justify-between px-6 py-4">
+          <Wordmark name="Cyanium" />
+          <nav className="hidden items-center gap-8 text-sm font-medium text-text-sub md:flex">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-text-strong">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              intent="neutral"
+              size="small"
+              className="md:hidden"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </Button>
+            <Button
+              variant="ghost"
+              intent="neutral"
+              size="small"
+              leadingIcon={<Github className="size-4" />}
+              onClick={() => window.open(REPO_URL, "_blank", "noopener")}
+            >
+              <span className="hidden sm:inline">GitHub</span>
+            </Button>
+            <Button
+              size="small"
+              trailingIcon={<ExternalLink className="size-4" />}
+              onClick={() => window.open(RELEASE_URL, "_blank", "noopener")}
+            >
+              v0.1.0
+            </Button>
+          </div>
         </div>
+        {menuOpen ? (
+          <nav className="border-t border-stroke-soft px-6 py-4 md:hidden">
+            <ul className="flex flex-col gap-3 text-sm font-medium text-text-sub">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <button
+                    type="button"
+                    className="w-full text-left hover:text-text-strong"
+                    onClick={() => scrollTo(link.href)}
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+              <li>
+                <button
+                  type="button"
+                  className="w-full text-left hover:text-text-strong"
+                  onClick={() => {
+                    window.open(REPO_URL, "_blank", "noopener");
+                    setMenuOpen(false);
+                  }}
+                >
+                  GitHub
+                </button>
+              </li>
+            </ul>
+          </nav>
+        ) : null}
       </header>
 
       <section className="mx-auto max-w-5xl px-6 py-16 text-center md:py-24">

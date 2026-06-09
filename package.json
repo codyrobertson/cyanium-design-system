@@ -20,6 +20,8 @@
     "check:registry": "node scripts/check-registry.mjs",
     "storybook": "pnpm --filter @cyanium/docs dev",
     "example": "pnpm --filter example dev",
+    "example:build": "pnpm turbo run build --filter=example",
+    "example:preview": "pnpm --filter example preview",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish"

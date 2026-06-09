@@ -111,6 +111,6 @@ export const siteFaq = [
   {
     value: "4",
     question: "Where is the source?",
-    answer: "github.com/codyrobertson/cyanium-design-system — MIT licensed, with Storybook and an example Vite app.",
+    answer: "https://github.com/codyrobertson/cyanium-design-system — MIT licensed, with Storybook and an example Vite app.",
   },
 ] as const;
