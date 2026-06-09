@@ -99,7 +99,13 @@ Published packages: `@cyanium/tokens`, `@cyanium/ui`, `@cyanium/kits`.
 
 1. Create the [`@cyanium` npm organization](https://www.npmjs.com/org/create) (required for scoped publishes).
 2. Add repo secret `NPM_TOKEN` — an npm automation token with publish access to `@cyanium`.
-3. Merge changes via PR; when you land changesets on `main`, the Release workflow opens a **Version packages** PR or publishes when that PR merges.
+3. Enable GitHub Actions (OAuth needs `workflow` scope):
+   ```bash
+   gh auth refresh -h github.com -s workflow
+   bash scripts/enable-github-actions.sh
+   git add .github/workflows && git commit -m "ci: enable GitHub Actions" && git push
+   ```
+4. Merge changes via PR; when you land changesets on `main`, the Release workflow opens a **Version packages** PR or publishes when that PR merges.
 
 ### Shipping a change
 
