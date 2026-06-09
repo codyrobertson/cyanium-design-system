@@ -339,6 +339,8 @@ export function CyaniumSite({ onExploreKit }: CyaniumSiteProps) {
           </a>
           <span className="mx-2 text-text-soft">·</span>
           Built with its own components
+          <span className="mx-2 text-text-soft">·</span>
+          <span className="font-mono text-xs text-text-soft">build e7d0281</span>
         </p>
       </footer>
     </div>
