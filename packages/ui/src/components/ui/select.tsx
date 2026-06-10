@@ -4,7 +4,7 @@ import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "../../lib/utils";
-import { insetBorder, insetBorderError, insetBorderHover, insetFocusError, insetFocusPrimaryDirect, popoverSurface } from "../../lib/surface";
+import { controlIconLeading, insetBorder, insetBorderError, insetBorderHover, insetFocusError, insetFocusPrimaryDirect, popoverSurface } from "../../lib/surface";
 import { Field } from "./field";
 
 export interface SelectOption { value: string; label: string; disabled?: boolean; }
@@ -50,15 +50,22 @@ export function Select({
           className,
         )}
       >
-        {leadingIcon ? <span className="inline-flex size-5 shrink-0 items-center justify-center text-icon-soft">{leadingIcon}</span> : null}
-        <SelectPrimitive.Value placeholder={placeholder} className="flex-1 text-left" />
-        <SelectPrimitive.Icon asChild><ChevronDown className="size-4 shrink-0 text-icon-soft" /></SelectPrimitive.Icon>
+        {leadingIcon ? <span className={controlIconLeading}>{leadingIcon}</span> : null}
+        <SelectPrimitive.Value placeholder={placeholder} className="min-w-0 flex-1 truncate text-left leading-5" />
+        <SelectPrimitive.Icon asChild>
+          <ChevronDown className="size-4 shrink-0 text-icon-soft" />
+        </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content className={cn("z-50 min-w-[var(--radix-select-trigger-width)] overflow-hidden", popoverSurface)} position="popper" sideOffset={6}>
           <SelectPrimitive.Viewport>
             {options.map((option) => (
-              <SelectPrimitive.Item key={option.value} value={option.value} disabled={option.disabled} className="relative flex h-9 cursor-pointer select-none items-center rounded-lg px-2.5 text-sm text-text-strong outline-none data-[highlighted]:bg-bg-weak data-[disabled]:pointer-events-none data-[disabled]:text-text-disabled">
+              <SelectPrimitive.Item
+                key={option.value}
+                value={option.value}
+                disabled={option.disabled}
+                className="relative flex h-9 cursor-pointer select-none items-center rounded-lg py-0 pl-2.5 pr-8 text-sm leading-5 text-text-strong outline-none data-[highlighted]:bg-bg-weak data-[disabled]:pointer-events-none data-[disabled]:text-text-disabled"
+              >
                 <SelectPrimitive.ItemText>{option.label}</SelectPrimitive.ItemText>
                 <SelectPrimitive.ItemIndicator className="absolute right-2 inline-flex items-center"><Check className="size-4 text-primary" /></SelectPrimitive.ItemIndicator>
               </SelectPrimitive.Item>

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Search } from "lucide-react";
 import { cn } from "../../lib/utils";
-import { inputSurfaceVariants } from "../../lib/surface";
+import { controlIconLeading, controlIconTrailing, inputSurfaceVariants } from "../../lib/surface";
 import { Kbd } from "./kbd";
 import { Field } from "./field";
 
@@ -17,22 +17,21 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   trailingIcon?: React.ReactNode;
 }
 
+const inputClassName =
+  "min-w-0 flex-1 border-none bg-transparent p-0 font-sans text-sm leading-5 text-text-strong outline-none placeholder:text-text-soft disabled:cursor-not-allowed disabled:text-text-disabled";
+
 const InputControl = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, inputSize = "medium", leadingIcon, trailingIcon, error, disabled, id, ...props }, ref) => (
     <div className={inputSurfaceVariants({ size: inputSize, error: !!error, disabled: !!disabled })}>
-      {leadingIcon ? <span className="inline-flex size-5 shrink-0 items-center justify-center text-icon-soft">{leadingIcon}</span> : null}
+      {leadingIcon ? <span className={controlIconLeading}>{leadingIcon}</span> : null}
       <input
         ref={ref}
         id={id}
         disabled={disabled}
-        className={cn(
-          "min-w-0 flex-1 border-none bg-transparent font-sans text-sm leading-5 text-text-strong outline-none placeholder:text-text-soft",
-          disabled && "text-text-disabled",
-          className,
-        )}
+        className={cn(inputClassName, className)}
         {...props}
       />
-      {trailingIcon ? <span className="inline-flex size-5 shrink-0 items-center justify-center text-icon-soft">{trailingIcon}</span> : null}
+      {trailingIcon ? <span className={controlIconTrailing}>{trailingIcon}</span> : null}
     </div>
   ),
 );
@@ -71,9 +70,13 @@ export interface SearchFieldProps extends Omit<InputProps, "leadingIcon"> {
 
 export function SearchField({ shortcut = "⌘K", placeholder = "Search…", className, ...props }: SearchFieldProps) {
   return (
-    <div className={cn("relative", className)}>
-      <Input leadingIcon={<Search className="size-5" />} placeholder={placeholder} trailingIcon={shortcut ? <Kbd>{shortcut}</Kbd> : undefined} {...props} />
-    </div>
+    <Input
+      className={className}
+      leadingIcon={<Search className="size-5" />}
+      placeholder={placeholder}
+      trailingIcon={shortcut ? <Kbd>{shortcut}</Kbd> : undefined}
+      {...props}
+    />
   );
 }
 

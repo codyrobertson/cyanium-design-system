@@ -17,7 +17,7 @@ export function Field({ label, htmlFor, required, hint, error, className, childr
     <div className={cn("flex flex-col gap-1.5 font-sans", className)} {...props}>
       {label ? <Label htmlFor={htmlFor} required={required}>{label}</Label> : null}
       {children}
-      {hint ? <p className={cn("flex items-center gap-1 text-xs leading-4 text-text-sub", error && "text-destructive")}>{hint}</p> : null}
+      {hint ? <p className={cn("text-xs leading-4 text-text-sub", error && "text-destructive")}>{hint}</p> : null}
     </div>
   );
 }

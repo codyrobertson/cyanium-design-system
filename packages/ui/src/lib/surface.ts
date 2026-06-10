@@ -53,9 +53,13 @@ export const insetPrimaryFocusVisible = "focus-visible:shadow-[inset_0_0_0_1px_v
 export const insetPrimaryHover = "hover:shadow-[inset_0_0_0_1px_var(--primary-base)]";
 export const insetErrorHover = "hover:shadow-[inset_0_0_0_1px_var(--state-error-base)]";
 
+/** Leading/trailing slots for text fields and selects */
+export const controlIconLeading = "inline-flex shrink-0 items-center text-icon-soft [&_svg]:size-5";
+export const controlIconTrailing = "inline-flex shrink-0 items-center text-icon-soft [&_svg]:size-5";
+
 export const inputSurfaceVariants = cva(
   cn(
-    "flex items-center gap-2 rounded-lg bg-bg-white transition-[box-shadow,background] duration-normal",
+    "flex w-full items-center gap-2.5 rounded-lg bg-bg-white transition-[box-shadow,background] duration-normal",
     insetBorder,
     insetBorderHover,
     insetFocusPrimary,
@@ -63,9 +67,9 @@ export const inputSurfaceVariants = cva(
   {
     variants: {
       size: {
-        small: "h-9 rounded-md",
-        medium: "h-10",
-        large: "h-12",
+        small: "h-9 px-2.5 rounded-md",
+        medium: "h-10 px-3",
+        large: "h-12 px-4",
       },
       error: {
         true: cn(insetBorderError, insetFocusError),

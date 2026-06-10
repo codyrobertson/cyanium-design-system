@@ -4,10 +4,10 @@ import { cn } from "../../lib/utils";
 export type IconSize = "xs" | "sm" | "md" | "lg";
 
 const sizeClass: Record<IconSize, string> = {
-  xs: "size-3.5 text-sm",
-  sm: "size-4 text-base",
-  md: "size-5 text-xl",
-  lg: "size-6 text-2xl",
+  xs: "size-3.5 [&_svg]:size-3.5",
+  sm: "size-4 [&_svg]:size-4",
+  md: "size-5 [&_svg]:size-5",
+  lg: "size-6 [&_svg]:size-6",
 };
 
 export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
