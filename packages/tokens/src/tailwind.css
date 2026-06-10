@@ -107,15 +107,20 @@
   --shadow-xs: var(--shadow-regular-xs);
   --shadow-sm: var(--shadow-regular-sm);
   --shadow-md: var(--shadow-regular-md);
+  --shadow-regular-xs: var(--shadow-regular-xs);
+  --shadow-regular-sm: var(--shadow-regular-sm);
+  --shadow-regular-md: var(--shadow-regular-md);
   --shadow-card: var(--shadow-card);
   --shadow-button: var(--shadow-button);
   --shadow-focus-primary: var(--shadow-focus-primary);
   --shadow-focus-neutral: var(--shadow-focus-neutral);
   --shadow-focus-error: var(--shadow-focus-error);
 
-  /* ---- Motion ----------------------------------------------------------- */
+  /* ---- Motion (Tailwind v4: --transition-duration-* → duration-* utilities) */
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 120ms;
-  --duration-normal: 150ms;
-  --duration-slow: 180ms;
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-duration-fast: 120ms;
+  --transition-duration-normal: 150ms;
+  --transition-duration-slow: 180ms;
 }

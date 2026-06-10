@@ -23,11 +23,21 @@ pnpm add @cyanium/ui @cyanium/tokens @cyanium/kits
 
 ```tsx
 import "@cyanium/ui/styles.css";
+import "@cyanium/kits/styles.css";
 import { Button, Input, DataTable } from "@cyanium/ui";
 import { AppSidebar, DashboardShell } from "@cyanium/kits/patterns";
 import { FinanceApp } from "@cyanium/kits/finance";
 import { financeBrand, sampleTransactions } from "@cyanium/kits/fixtures";
 ```
+
+When using **@cyanium/kits**, import both stylesheets in your app CSS entry (kits re-exports UI + scans kit source for Tailwind v4):
+
+```css
+@import "@cyanium/ui/styles.css";
+@import "@cyanium/kits/styles.css";
+```
+
+`@cyanium/kits/styles.css` already imports UI styles; importing both is the documented pattern so UI-only consumers stay unchanged. Add `@source` for your own app files if you use Tailwind utilities locally.
 
 ### shadcn registry (copy into your app)
 
@@ -89,6 +99,7 @@ pnpm example:preview    # serve the production build locally
 pnpm typecheck && pnpm lint && pnpm test
 pnpm build:registry     # refresh registry/cyanium.json
 pnpm check:registry     # verify committed registry matches source
+pnpm check:css          # verify example build includes kit/UI utilities (run after build)
 ```
 
 ## Deploy (example app)

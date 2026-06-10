@@ -18,6 +18,7 @@
     "test": "turbo run test",
     "build:registry": "node scripts/build-registry.mjs",
     "check:registry": "node scripts/check-registry.mjs",
+    "check:css": "node scripts/check-css-coverage.mjs",
     "storybook": "pnpm --filter @cyanium/docs dev",
     "example": "pnpm --filter example dev",
     "example:build": "pnpm turbo run build --filter=example",

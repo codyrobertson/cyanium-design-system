@@ -1,4 +1,4 @@
 @import "@cyanium/kits/styles.css";
 
-/* Scan example app source for local utilities */
+/* Scan Storybook stories for local utilities */
 @source "./**/*.{ts,tsx}";

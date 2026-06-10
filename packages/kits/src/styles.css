@@ -1,0 +1,10 @@
+@import "@cyanium/ui/styles.css";
+
+/* Scan kit source so utilities used in @cyanium/kits ship in consumer CSS */
+@source "./**/*.{ts,tsx}";
+
+/* Kit accent tokens (not in global figma export) */
+:root {
+  --ai-accent: rgb(99, 102, 241);
+  --ai-accent-soft: rgba(99, 102, 241, 0.12);
+}

@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/react-vite";
-import "@cyanium/ui/styles.css";
+import "../src/storybook.css";
 
 const preview: Preview = {
   parameters: {

@@ -11,8 +11,9 @@ import {
   buildFinanceAppProps,
   buildLandingPageProps,
 } from "@cyanium/kits/fixtures";
-import { ToasterProvider, Button } from "@cyanium/ui";
+import { ToasterProvider } from "@cyanium/ui";
 import { CyaniumSite, type KitView } from "./site/cyanium-site";
+import { DemoChrome } from "./demo-chrome";
 import "./index.css";
 
 type View = "home" | KitView;
@@ -38,25 +39,7 @@ function App() {
 
   return (
     <ToasterProvider>
-      <div className="fixed left-4 top-4 z-50 flex flex-col gap-2">
-        <Button size="small" variant="stroke" onClick={() => setView("home")}>
-          ← Cyanium home
-        </Button>
-        <div className="flex gap-2">
-          <Button size="small" variant={view === "finance" ? "filled" : "stroke"} onClick={() => setView("finance")}>Finance</Button>
-          <Button size="small" variant={view === "landing" ? "filled" : "stroke"} onClick={() => setView("landing")}>Landing</Button>
-          <Button size="small" variant={view === "ai" ? "filled" : "stroke"} onClick={() => setView("ai")}>AI</Button>
-        </div>
-        <div className="flex gap-2">
-          <Button size="small" variant={mode === "demo" ? "filled" : "stroke"} onClick={() => setMode("demo")}>Demo</Button>
-          <Button size="small" variant={mode === "integration" ? "filled" : "stroke"} onClick={() => setMode("integration")}>Integration</Button>
-        </div>
-        {mode === "integration" ? (
-          <p className="max-w-xs rounded-lg bg-bg-white px-2 py-1 text-xs text-text-sub shadow-sm">
-            Wired via <code className="font-mono">build*AppProps()</code> from <code className="font-mono">@cyanium/kits/fixtures</code>
-          </p>
-        ) : null}
-      </div>
+      <DemoChrome view={view} mode={mode} onHome={() => setView("home")} onView={setView} onMode={setMode} />
       {content}
     </ToasterProvider>
   );

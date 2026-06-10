@@ -2,6 +2,9 @@
 @import "@cyanium/tokens/css";
 @import "@cyanium/tokens/tailwind";
 
+/* Scan all UI source so utilities used in @cyanium/ui ship in styles.css */
+@source "./**/*.{ts,tsx}";
+
 @theme inline {
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;

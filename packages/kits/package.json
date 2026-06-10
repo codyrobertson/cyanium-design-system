@@ -38,9 +38,11 @@
     "./patterns": {
       "types": "./dist/patterns/index.d.ts",
       "import": "./dist/patterns/index.js"
-    }
+    },
+    "./styles.css": "./src/styles.css"
   },
-  "files": ["dist"],
+  "files": ["dist", "src/styles.css"],
+  "sideEffects": ["**/*.css"],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",

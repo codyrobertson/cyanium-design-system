@@ -51,7 +51,7 @@ export function AiSidebar({
   return (
     <aside className={cn("flex h-screen w-[280px] shrink-0 flex-col border-r border-stroke-soft bg-bg-white", className)} {...props}>
       <div className="flex items-center justify-between px-4 py-3">
-        <div className="inline-flex size-9 items-center justify-center rounded-xl bg-[var(--ai-accent,#6366f1)]"><Sparkles className="size-5 text-white" /></div>
+        <div className="inline-flex size-9 items-center justify-center rounded-xl bg-[var(--ai-accent)] shadow-[0_8px_16px_-6px_var(--ai-accent-soft)]"><Sparkles className="size-5 text-white" /></div>
         <button type="button" className="inline-flex size-8 items-center justify-center rounded-lg text-icon-soft hover:bg-bg-weak" aria-label="Collapse sidebar"><PanelLeft className="size-4" /></button>
       </div>
       <div className="px-3">
@@ -115,10 +115,19 @@ export function ChatArea({ messages, title, className, ...props }: { messages: C
   return (
     <div className={cn("flex min-h-0 flex-1 flex-col", className)} {...props}>
       <div className="border-b border-stroke-soft px-6 py-4"><h1 className="font-display text-lg font-semibold text-text-strong">{title}</h1></div>
-      <div className="flex-1 space-y-6 overflow-y-auto px-6 py-6">
+      <div className="flex-1 space-y-5 overflow-y-auto bg-bg-weak/40 px-6 py-6">
         {messages.map((m) => (
           <div key={m.id} className={cn("max-w-2xl", m.role === "user" && "ml-auto text-right")}>
-            <div className={cn("inline-block rounded-2xl px-4 py-3 text-sm leading-relaxed", m.role === "user" ? "bg-bg-strong text-white" : cn("bg-bg-weak text-text-strong", insetBorder))}>{m.content}</div>
+            <div
+              className={cn(
+                "inline-block max-w-full rounded-2xl px-4 py-3 text-sm leading-relaxed",
+                m.role === "user"
+                  ? "bg-bg-strong text-white shadow-md"
+                  : cn("bg-bg-white text-text-strong shadow-sm", insetBorder),
+              )}
+            >
+              {m.content}
+            </div>
           </div>
         ))}
       </div>
@@ -143,16 +152,16 @@ export function Composer({ value, onChange, onSend, model, models, onModelChange
   return (
     <div className="shrink-0 px-6 pb-4">
       <div className="mx-auto max-w-3xl">
-        <div className={cn("flex items-center gap-1.5 rounded-t-xl bg-bg-weak px-4 py-2 text-sm text-text-sub", insetBorder)}>
-          <Zap className="size-4 text-[var(--ai-accent,#6366f1)]" />
+        <div className={cn("flex items-center gap-1.5 rounded-t-xl bg-bg-white px-4 py-2.5 text-sm text-text-sub shadow-sm", insetBorder)}>
+          <Zap className="size-4 text-[var(--ai-accent)]" />
           {upgradeMessage}
         </div>
-        <div className={cn("rounded-b-2xl bg-bg-white px-4 py-3 shadow-regular-sm", insetBorder)}>
+        <div className={cn("rounded-b-2xl bg-bg-white px-4 py-3 shadow-md", insetBorder)}>
           <textarea className="block w-full resize-none border-none bg-transparent text-base text-text-strong outline-none placeholder:text-text-soft" placeholder={placeholder} rows={2} value={value} onChange={(e) => onChange(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); submit(); } }} />
           <div className="mt-2 flex items-center gap-2">
             <button type="button" className="inline-flex size-9 items-center justify-center rounded-full bg-bg-weak text-icon-sub hover:bg-bg-soft" aria-label="Attach"><Plus className="size-5" /></button>
             <Dropdown align="start" trigger={<button type="button" className="inline-flex h-9 items-center gap-1.5 rounded-full bg-bg-weak px-3 text-sm font-medium text-text-sub hover:bg-bg-soft">{model} <ChevronDown className="size-4 text-icon-soft" /></button>} items={models.map((m) => ({ label: m, icon: <Sparkles className="size-4" />, onClick: () => onModelChange?.(m) }))} />
-            <button type="button" onClick={submit} className={cn("ml-auto inline-flex size-9 items-center justify-center rounded-full transition-colors", value.trim() ? "bg-[var(--ai-accent,#6366f1)] text-white" : "bg-bg-soft text-icon-soft")} aria-label="Send"><ArrowUp className="size-5" /></button>
+            <button type="button" onClick={submit} className={cn("ml-auto inline-flex size-9 items-center justify-center rounded-full transition-all duration-normal shadow-sm", value.trim() ? "bg-[var(--ai-accent)] text-white shadow-[0_8px_20px_-8px_var(--ai-accent-soft)]" : "bg-bg-soft text-icon-soft")} aria-label="Send"><ArrowUp className="size-5" /></button>
           </div>
         </div>
         <p className="mt-2 text-center text-xs text-text-soft">{disclaimer}</p>
