@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  ArrowRight,
-  Copy,
-  Github,
-  Check,
-  Terminal,
-} from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import {
   Badge,
   Button,
@@ -19,329 +13,380 @@ import {
   RELEASE_URL,
   installTabs,
   liveKits,
-  packages,
+  manifest,
   siteFaq,
   siteStats,
   type InstallTabId,
 } from "./content";
+import { CopyBlock } from "./copy-block";
+import type { KitView } from "./navigation";
 import "./site.css";
 
-export type KitView = "finance" | "landing" | "ai";
+export type { KitView };
 
 export interface CyaniumSiteProps {
   onExploreKit: (kit: KitView) => void;
+  onOpenGallery: () => void;
+  onOpenDocs: () => void;
 }
 
 function SiteLogo() {
   return (
-    <span className="inline-flex items-center gap-2.5 font-display text-[15px] font-semibold tracking-tight text-white">
-      <span className="relative inline-flex size-8 items-center justify-center rounded-[10px] bg-gradient-to-br from-[var(--blue-400)] to-[var(--blue-600)] shadow-[0_0_0_1px_rgba(255,255,255,0.12)_inset,0_8px_20px_-6px_rgba(59,130,246,0.55)]">
-        <span className="size-3 rounded-[3px] bg-white/90" />
+    <span className="inline-flex items-center gap-3">
+      <span className="site-logo-mark relative inline-flex size-9 shrink-0 items-center justify-center rounded-lg">
+        <span className="relative z-10 size-2.5 rounded-[2px] bg-white/95" />
       </span>
-      Cyanium
+      <span className="flex flex-col leading-none">
+        <span className="font-display text-[15px] font-semibold tracking-tight text-[var(--site-ink)]">
+          Cyanium
+        </span>
+        <span className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--site-ink-faint)]">
+          Design System
+        </span>
+      </span>
     </span>
   );
 }
 
-function KitThumb({ kit }: { kit: (typeof liveKits)[number] }) {
+function KitPreview({ kit }: { kit: (typeof liveKits)[number] }) {
+  if (kit.id === "finance") {
+    return (
+      <div className="site-kit-preview site-kit-preview-finance">
+        <div className="rounded-lg border border-stroke-soft bg-bg-white p-2 shadow-sm">
+          <div className="h-2 w-10 rounded bg-bg-soft" />
+          <div className="mt-2 font-mono text-lg font-medium text-text-strong">$12.4k</div>
+          <div className="mt-1 text-[10px] text-text-soft">Monthly spend</div>
+        </div>
+        <div className="flex flex-col justify-end gap-1.5">
+          <div className="flex h-10 items-end gap-1">
+            {[32, 58, 44, 72, 51, 68].map((h, i) => (
+              <div
+                key={i}
+                className="flex-1 rounded-sm bg-[var(--kit-accent)] opacity-80"
+                style={{ height: `${h}%` }}
+              />
+            ))}
+          </div>
+          <div className="h-2 w-full rounded bg-bg-soft" />
+          <div className="h-2 w-2/3 rounded bg-bg-weak" />
+        </div>
+      </div>
+    );
+  }
+
+  if (kit.id === "ai") {
+    return (
+      <div className="site-kit-preview site-kit-preview-ai">
+        <div className="ml-auto max-w-[78%] rounded-2xl rounded-tr-md bg-bg-strong px-3 py-2 text-[11px] text-white">
+          Summarize last quarter&apos;s spend
+        </div>
+        <div className="max-w-[88%] rounded-2xl rounded-tl-md border border-stroke-soft bg-bg-white px-3 py-2 text-[11px] text-text-strong shadow-sm">
+          Total spend was $37,240 across 142 transactions…
+        </div>
+        <div className="mt-1 h-8 rounded-full border border-stroke-soft bg-bg-white shadow-sm" />
+      </div>
+    );
+  }
+
   return (
-    <div className={cn("relative overflow-hidden rounded-xl bg-gradient-to-br p-4", kit.accent)}>
-      <div className={cn("absolute left-0 top-0 h-1 w-full", kit.bar)} />
-      <div className="mt-2 space-y-2">
-        {kit.id === "finance" ? (
-          <>
-            <div className="flex gap-2">
-              <div className="h-16 w-24 rounded-lg bg-white/80 shadow-sm" />
-              <div className="flex flex-1 flex-col gap-1.5">
-                <div className="h-3 w-3/4 rounded bg-white/70" />
-                <div className="h-3 w-1/2 rounded bg-white/50" />
-                <div className="mt-auto flex h-8 items-end gap-1">
-                  {[40, 65, 45, 80, 55].map((h, i) => (
-                    <div key={i} className="w-2 rounded-sm bg-[var(--brand-orange)]/70" style={{ height: `${h}%` }} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
-        {kit.id === "ai" ? (
-          <div className="space-y-2 px-1">
-            <div className="ml-auto h-6 w-[70%] rounded-xl rounded-tr-sm bg-[var(--blue-500)]/15" />
-            <div className="h-10 w-[85%] rounded-xl rounded-tl-sm bg-white/80" />
-            <div className="mx-auto h-8 w-full rounded-full bg-white/60" />
-          </div>
-        ) : null}
-        {kit.id === "landing" ? (
-          <div className="space-y-2 px-2 py-1 text-center">
-            <div className="mx-auto h-2 w-12 rounded-full bg-white/50" />
-            <div className="mx-auto h-4 w-3/4 rounded bg-white/70" />
-            <div className="mx-auto h-2 w-1/2 rounded bg-white/40" />
-            <div className="mx-auto mt-2 h-6 w-20 rounded-md bg-[var(--blue-500)]/80" />
-          </div>
-        ) : null}
+    <div className="site-kit-preview site-kit-preview-landing">
+      <div className="h-1.5 w-14 rounded-full bg-[var(--kit-accent)]/30" />
+      <div className="h-3 w-3/4 rounded bg-text-strong/10" />
+      <div className="h-2 w-1/2 rounded bg-text-soft/20" />
+      <div className="mt-2 flex gap-2">
+        <div className="h-6 w-16 rounded-md bg-[var(--kit-accent)]" />
+        <div className="h-6 w-16 rounded-md border border-stroke-soft bg-bg-white" />
       </div>
     </div>
   );
 }
 
-function CopyBlock({ command }: { command: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const copy = async () => {
-    await navigator.clipboard.writeText(command);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <div className="relative overflow-hidden rounded-xl border border-stroke-soft bg-bg-strong">
-      <div className="flex items-center justify-between border-b border-white/10 px-4 py-2">
-        <span className="inline-flex items-center gap-2 text-xs font-medium text-white/60">
-          <Terminal className="size-3.5" /> terminal
-        </span>
-        <button
-          type="button"
-          onClick={copy}
-          className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-white/70 transition-colors hover:bg-white/10 hover:text-white"
-        >
-          {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
-          {copied ? "Copied" : "Copy"}
-        </button>
-      </div>
-      <pre className="site-code overflow-x-auto p-4 text-[13px] leading-relaxed text-white/90">
-        <code>{command}</code>
-      </pre>
-    </div>
-  );
-}
-
-export function CyaniumSite({ onExploreKit }: CyaniumSiteProps) {
+export function CyaniumSite({ onExploreKit, onOpenGallery, onOpenDocs }: CyaniumSiteProps) {
   const [installTab, setInstallTab] = useState<InstallTabId>("npm");
   const activeInstall = installTabs.find((t) => t.id === installTab) ?? installTabs[0];
 
   return (
-    <div className="site-root min-h-screen bg-bg-white">
-      {/* Hero */}
-      <div className="site-hero-bg relative overflow-hidden">
-        <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <div className="site-root min-h-screen">
+      <header className="site-header sticky top-0 z-40">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <SiteLogo />
-          <div className="flex items-center gap-2">
+          <nav className="flex items-center gap-1 sm:gap-2">
             <Button
               size="small"
               variant="ghost"
               intent="neutral"
-              className="text-white/80 hover:bg-white/10 hover:text-white"
-              leadingIcon={<Github className="size-4" />}
-              onClick={() => window.open(REPO_URL, "_blank", "noopener")}
+              className="hidden sm:inline-flex"
+              onClick={onOpenGallery}
             >
-              <span className="hidden sm:inline">Source</span>
+              Components
             </Button>
             <Button
               size="small"
-              className="bg-white text-[var(--site-ink)] hover:bg-white/90"
+              variant="ghost"
+              intent="neutral"
+              className="hidden sm:inline-flex"
+              onClick={onOpenDocs}
+            >
+              Docs
+            </Button>
+            <Button
+              size="small"
+              variant="ghost"
+              intent="neutral"
+              leadingIcon={<Github className="size-4" />}
+              onClick={() => window.open(REPO_URL, "_blank", "noopener")}
+            >
+              <span className="hidden sm:inline">GitHub</span>
+            </Button>
+            <Button
+              size="small"
+              intent="primary"
               onClick={() => document.getElementById("kits")?.scrollIntoView({ behavior: "smooth" })}
             >
               Live demos
             </Button>
-          </div>
-        </header>
+          </nav>
+        </div>
+      </header>
 
-        <div className="relative z-10 mx-auto grid max-w-6xl gap-12 px-6 pb-28 pt-8 md:grid-cols-[1fr_1.05fr] md:items-center md:gap-16 md:pb-32 md:pt-4">
-          <div>
-            <div className="site-reveal mb-5 flex flex-wrap gap-2">
-              {siteStats.map((s) => (
-                <span
-                  key={s.label}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur-sm"
+      <main>
+        {/* Hero */}
+        <section className="mx-auto max-w-6xl px-6 pb-16 pt-14 md:pb-24 md:pt-20">
+          <div className="site-reveal site-section-label mb-8">Open source · MIT · v0.1.0</div>
+
+          <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20">
+            <div>
+              <h1 className="site-reveal site-reveal-delay-1 site-serif max-w-[14ch] text-[clamp(2.75rem,6vw,4.5rem)] leading-[0.95] text-[var(--site-ink)]">
+                The interface layer you <em>wire once</em>.
+              </h1>
+              <p className="site-reveal site-reveal-delay-2 mt-7 max-w-md text-[16px] leading-[1.65] text-[var(--site-ink-muted)]">
+                Tokens, Radix primitives, product kits, and an in-app gallery — built for teams
+                who ship surfaces, not screenshot collections.
+              </p>
+              <div className="site-reveal site-reveal-delay-3 mt-10 flex flex-wrap gap-3">
+                <Button
+                  size="medium"
+                  intent="primary"
+                  trailingIcon={<ArrowRight className="size-4" />}
+                  onClick={onOpenGallery}
                 >
-                  <span className="font-mono text-white">{s.num}</span>
-                  {s.label}
-                </span>
-              ))}
-              <Badge color="green" variant="lighter" size="small" className="border border-white/10">
-                MIT
-              </Badge>
+                  Browse components
+                </Button>
+                <Button
+                  size="medium"
+                  variant="stroke"
+                  intent="neutral"
+                  onClick={() => document.getElementById("install")?.scrollIntoView({ behavior: "smooth" })}
+                >
+                  Install
+                </Button>
+                <Button
+                  size="medium"
+                  variant="ghost"
+                  intent="neutral"
+                  onClick={onOpenDocs}
+                >
+                  Read docs
+                </Button>
+              </div>
             </div>
-            <h1 className="site-reveal site-reveal-delay-1 max-w-xl font-display text-[2.35rem] font-medium leading-[1.08] tracking-tight text-white md:text-[3.25rem]">
-              Design system.
-              <br />
-              <span className="text-white/55">Not a component dump.</span>
-            </h1>
-            <p className="site-reveal site-reveal-delay-2 mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
-              Tokens, Radix primitives, and three product kits — wired with fixture builders,
-              Storybook, and a registry you can actually CI-check.
-            </p>
-            <div className="site-reveal site-reveal-delay-3 mt-8 flex flex-wrap gap-3">
-              <Button
-                size="medium"
-                className="bg-white text-[var(--site-ink)] hover:bg-white/90"
-                trailingIcon={<ArrowRight className="size-4" />}
-                onClick={() => document.getElementById("install")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                Install
-              </Button>
-              <Button
-                size="medium"
-                variant="stroke"
-                intent="neutral"
-                className="border-white/20 bg-transparent text-white hover:bg-white/10"
-                onClick={() => window.open(RELEASE_URL, "_blank", "noopener")}
-              >
-                v0.1.0 release notes
-              </Button>
+
+            <div className="site-reveal site-reveal-delay-2 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4 lg:grid-cols-2">
+              {siteStats.map((s) => (
+                <div key={s.label} className="site-stat">
+                  <div className="site-stat-num">{s.num}</div>
+                  <div className="mt-1.5 text-xs text-[var(--site-ink-faint)]">{s.label}</div>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="site-demo-float site-reveal site-reveal-delay-2 relative">
-            <div className="absolute -inset-8 rounded-[32px] bg-[var(--blue-500)]/20 blur-3xl" aria-hidden />
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-bg-white shadow-[0_32px_64px_-24px_rgba(0,0,0,0.5)]">
-              <div className="flex items-center gap-2 border-b border-stroke-soft bg-bg-weak px-4 py-3">
-                <span className="size-2 rounded-full bg-[#ff5f57]" />
-                <span className="size-2 rounded-full bg-[#febc2e]" />
-                <span className="size-2 rounded-full bg-[#28c840]" />
-                <span className="ml-2 text-xs text-text-soft">@cyanium/ui</span>
-              </div>
-              <div className="space-y-4 p-5">
+          <div className="site-reveal site-reveal-delay-3 site-hero-rule mt-14 md:mt-20" />
+
+          {/* Specimen — real components, not a fake window */}
+          <div className="site-reveal site-reveal-delay-4 site-specimen mt-10 overflow-hidden rounded-xl">
+            <div className="site-specimen-bar flex items-center justify-between px-4 py-2.5">
+              <span className="font-mono text-[11px] text-[var(--site-ink-faint)]">@cyanium/ui</span>
+              <span className="font-mono text-[11px] text-[var(--site-ink-faint)]">specimen</span>
+            </div>
+            <div className="grid gap-6 p-6 md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:p-8">
+              <div className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   <Button size="small" intent="primary">Primary</Button>
                   <Button size="small" variant="stroke" intent="neutral">Neutral</Button>
-                  <Tag>Radix</Tag>
+                  <Button size="small" variant="lighter" intent="error">Destructive</Button>
                 </div>
-                <Input label="Work email" placeholder="you@team.com" />
-                <div className="flex gap-2">
-                  <Badge color="green" variant="lighter">a11y</Badge>
-                  <Badge color="blue" variant="lighter">CVA</Badge>
-                  <Badge color="gray" variant="lighter">Tailwind v4</Badge>
-                </div>
+                <Input label="Work email" placeholder="you@team.com" className="max-w-sm" />
+              </div>
+              <div className="flex flex-wrap items-center gap-2 md:max-w-xs md:justify-end">
+                <Badge color="green" variant="lighter" dot>Accessible</Badge>
+                <Badge color="blue" variant="lighter">Radix</Badge>
+                <Tag>Tailwind v4</Tag>
+                <Tag gray>CVA</Tag>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="site-hero-fade absolute inset-x-0 bottom-0 h-24" aria-hidden />
-      </div>
-
-      {/* Packages strip */}
-      <section id="features" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <p className="mb-8 font-mono text-xs uppercase tracking-[0.2em] text-text-soft">Monorepo packages</p>
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-stroke-soft bg-stroke-soft md:grid-cols-2">
-          {packages.map((pkg) => (
-            <div key={pkg.name} className="flex flex-col gap-1 bg-bg-white p-6 md:p-8">
-              <code className="font-mono text-sm font-medium text-primary">{pkg.name}</code>
-              <p className="text-sm text-text-sub">{pkg.blurb}</p>
+        {/* Manifest */}
+        <section id="features" className="border-y border-[var(--site-rule)] bg-white/60">
+          <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+            <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="site-section-label">Manifest</p>
+                <h2 className="site-serif mt-3 text-3xl text-[var(--site-ink)] md:text-4xl">
+                  What you get
+                </h2>
+              </div>
+              <p className="max-w-sm text-sm leading-relaxed text-[var(--site-ink-muted)]">
+                Four layers, one repo. No hand-wavy &ldquo;design language&rdquo; PDF — working code
+                with checks that keep it honest.
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Live kits — bento */}
-      <section id="kits" className="border-y border-stroke-soft bg-bg-weak py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-soft">Live in this app</p>
-              <h2 className="mt-2 font-display text-3xl font-medium tracking-tight text-text-strong md:text-4xl">
-                Three kits. Click to mount.
+              {manifest.map((item) => (
+                <article key={item.index} className="site-manifest-row">
+                  <span className="site-manifest-index">{item.index}</span>
+                  <div>
+                    <h3 className="font-display text-lg font-medium text-[var(--site-ink)]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--site-ink-muted)]">
+                      {item.body}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Kits */}
+        <section id="kits" className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="site-section-label">Product kits</p>
+              <h2 className="site-serif mt-3 text-3xl text-[var(--site-ink)] md:text-4xl">
+                Full surfaces, live in this app
               </h2>
             </div>
-            <p className="max-w-sm text-sm text-text-sub">
-              Demo mode uses *Demo wrappers. Integration mode uses{" "}
-              <code className="rounded bg-bg-white px-1 py-0.5 font-mono text-xs">build*AppProps()</code>.
+            <p className="max-w-sm text-sm leading-relaxed text-[var(--site-ink-muted)]">
+              Demo mode uses wrappers. Integration mode wires{" "}
+              <code className="rounded bg-bg-weak px-1 py-0.5 font-mono text-xs">build*AppProps()</code>{" "}
+              from fixtures.
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3 md:grid-rows-2">
-            {liveKits.map((kit, i) => (
+          <div className="grid gap-5 md:grid-cols-3">
+            {liveKits.map((kit) => (
               <button
                 key={kit.id}
                 type="button"
                 onClick={() => onExploreKit(kit.id)}
                 className={cn(
-                  "site-kit-thumb group flex flex-col overflow-hidden rounded-2xl border border-stroke-soft bg-bg-white text-left",
-                  i === 0 && "md:col-span-2 md:row-span-2",
+                  "site-kit-card site-kit-tone-" + kit.tone,
+                  "group overflow-hidden rounded-xl",
                 )}
               >
-                <div className={cn("p-5", i === 0 ? "pb-3" : "pb-2")}>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-display text-lg font-medium text-text-strong group-hover:text-primary">
+                <div className="site-kit-accent-bar" />
+                <div className="flex items-start justify-between gap-3 p-5 pb-3">
+                  <div>
+                    <span className="site-kit-index">{kit.index}</span>
+                    <h3 className="mt-2 font-display text-xl font-medium text-text-strong group-hover:text-primary">
                       {kit.label}
-                    </span>
-                    <Tag className="shrink-0">{kit.tag}</Tag>
+                    </h3>
                   </div>
-                  <p className="mt-1.5 text-sm text-text-sub">{kit.description}</p>
+                  <Tag className="shrink-0">{kit.tag}</Tag>
                 </div>
-                <div className={cn("mt-auto px-5", i === 0 ? "pb-5" : "pb-4")}>
-                  <KitThumb kit={kit} />
-                </div>
-                <div className="flex items-center gap-1 border-t border-stroke-soft px-5 py-3 text-sm font-medium text-primary">
+                <p className="px-5 pb-4 text-sm leading-relaxed text-text-sub">{kit.description}</p>
+                <KitPreview kit={kit} />
+                <div className="flex items-center gap-1.5 border-t border-stroke-soft px-5 py-3.5 text-sm font-medium text-primary">
                   Open demo
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                 </div>
               </button>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Install */}
-      <section id="install" className="mx-auto max-w-3xl px-6 py-16 md:py-24">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-text-soft">Get started</p>
-        <h2 className="mt-2 font-display text-3xl font-medium tracking-tight text-text-strong">
-          Pick your install path
-        </h2>
-        <div className="mt-8 flex gap-1 rounded-lg bg-bg-weak p-1">
-          {installTabs.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setInstallTab(tab.id)}
-              className={cn(
-                "flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                installTab === tab.id
-                  ? "bg-bg-white text-text-strong shadow-sm"
-                  : "text-text-sub hover:text-text-strong",
-              )}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-        <div className="mt-4">
-          <CopyBlock command={activeInstall.command} />
-        </div>
-        <p className="mt-4 text-center text-sm text-text-soft">
-          Local dev:{" "}
-          <code className="font-mono text-text-sub">pnpm storybook</code>
-          {" · "}
-          <code className="font-mono text-text-sub">pnpm example</code>
-        </p>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="border-t border-stroke-soft bg-bg-weak py-16 md:py-20">
-        <div className="mx-auto max-w-2xl px-6">
-          <h2 className="font-display text-2xl font-medium text-text-strong">FAQ</h2>
-          <div className="mt-8">
-            <FaqList items={[...siteFaq]} />
+        {/* Install */}
+        <section id="install" className="border-t border-[var(--site-rule)] bg-white/60">
+          <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:py-24">
+            <div>
+              <p className="site-section-label">Get started</p>
+              <h2 className="site-serif mt-3 text-3xl text-[var(--site-ink)]">
+                Three ways in
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-[var(--site-ink-muted)]">
+                Install packages, copy from the registry, or clone the monorepo and run Storybook
+                locally.
+              </p>
+              <div className="mt-8 flex flex-col gap-1">
+                {installTabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setInstallTab(tab.id)}
+                    className={cn(
+                      "flex items-center justify-between rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors",
+                      installTab === tab.id
+                        ? "bg-[var(--site-cyan-soft)] text-[var(--site-ink)]"
+                        : "text-[var(--site-ink-muted)] hover:bg-bg-weak hover:text-[var(--site-ink)]",
+                    )}
+                  >
+                    {tab.label}
+                    {installTab === tab.id ? (
+                      <ArrowRight className="size-4 text-[var(--site-cyan)]" />
+                    ) : null}
+                  </button>
+                ))}
+              </div>
+              <p className="mt-6 text-xs text-[var(--site-ink-faint)]">
+                Local:{" "}
+                <code className="font-mono">pnpm storybook</code>
+                {" · "}
+                <code className="font-mono">pnpm example</code>
+              </p>
+            </div>
+            <div className="flex flex-col justify-center">
+              <CopyBlock command={activeInstall.command} variant="light" />
+              <button
+                type="button"
+                onClick={() => window.open(RELEASE_URL, "_blank", "noopener")}
+                className="mt-4 self-start text-sm text-[var(--site-cyan)] hover:underline"
+              >
+                v0.1.0 release notes →
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <footer className="border-t border-stroke-soft py-10 text-center">
-        <p className="text-sm text-text-sub">
-          <a
-            href={REPO_URL}
-            className="font-medium text-text-strong hover:text-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            codyrobertson/cyanium-design-system
-          </a>
-          <span className="mx-2 text-text-soft">·</span>
-          Built with its own components
-          <span className="mx-2 text-text-soft">·</span>
-          <span className="font-mono text-xs text-text-soft">build e7d0281</span>
-        </p>
+        {/* FAQ */}
+        <section id="faq" className="border-t border-[var(--site-rule)]">
+          <div className="mx-auto max-w-2xl px-6 py-16 md:py-20">
+            <h2 className="site-serif text-2xl text-[var(--site-ink)] md:text-3xl">Questions</h2>
+            <div className="mt-8">
+              <FaqList items={[...siteFaq]} />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="site-footer py-10">
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <p className="text-sm text-[var(--site-ink-muted)]">
+            <a
+              href={REPO_URL}
+              className="font-medium text-[var(--site-ink)] hover:text-[var(--site-cyan)]"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              codyrobertson/cyanium-design-system
+            </a>
+            <span className="mx-2 text-[var(--site-ink-faint)]">·</span>
+            Built with its own components
+          </p>
+        </div>
       </footer>
     </div>
   );

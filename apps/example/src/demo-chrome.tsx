@@ -9,6 +9,8 @@ export interface DemoChromeProps {
   onHome: () => void;
   onView: (view: KitView) => void;
   onMode: (mode: Mode) => void;
+  onGallery?: () => void;
+  onDocs?: () => void;
 }
 
 const views: { id: KitView; label: string }[] = [
@@ -17,7 +19,7 @@ const views: { id: KitView; label: string }[] = [
   { id: "ai", label: "AI" },
 ];
 
-export function DemoChrome({ view, mode, onHome, onView, onMode }: DemoChromeProps) {
+export function DemoChrome({ view, mode, onHome, onView, onMode, onGallery, onDocs }: DemoChromeProps) {
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center p-3 pb-4">
       <div
@@ -61,6 +63,21 @@ export function DemoChrome({ view, mode, onHome, onView, onMode }: DemoChromePro
             Integration
           </Button>
         </div>
+        {(onGallery || onDocs) && (
+          <>
+            <div className="mx-1 hidden h-6 w-px bg-stroke-soft sm:block" />
+            {onGallery && (
+              <Button size="small" variant="ghost" intent="neutral" onClick={onGallery}>
+                Gallery
+              </Button>
+            )}
+            {onDocs && (
+              <Button size="small" variant="ghost" intent="neutral" onClick={onDocs}>
+                Docs
+              </Button>
+            )}
+          </>
+        )}
       </div>
     </div>
   );
