@@ -76,6 +76,20 @@ export function GalleryPage({ selectedId }: GalleryPageProps) {
             {entry.usage}
           </Text>
         </section>
+
+        {entry.props && entry.props.length > 0 ? (
+          <section>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-text-soft">Props</p>
+            <dl className="max-w-2xl divide-y divide-stroke-soft rounded-xl border border-stroke-soft">
+              {entry.props.map((prop) => (
+                <div key={prop.name} className="grid gap-1 px-4 py-3 sm:grid-cols-[minmax(8rem,30%)_1fr]">
+                  <dt className="font-mono text-sm text-text-strong">{prop.name}</dt>
+                  <dd className="text-sm text-text-sub">{prop.description}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ) : null}
       </div>
     </SiteShell>
   );

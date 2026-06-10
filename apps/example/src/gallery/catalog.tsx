@@ -1,41 +1,43 @@
-import { useState, type ComponentType } from "react";
+import type { ComponentType } from "react";
 import {
-  Alert,
-  Avatar,
-  Badge,
-  Banner,
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  Checkbox,
-  CheckboxControl,
-  DataTable,
-  Dropdown,
-  EmptyState,
-  FaqList,
-  Input,
-  Kbd,
-  Label,
-  Modal,
-  Pagination,
-  ProgressBar,
-  Select,
-  Skeleton,
-  Slider,
-  Switch,
-  Tabs,
-  TabsContent,
-  Tag,
-  Text,
-  Textarea,
-  Tooltip,
-  TooltipProvider,
-} from "@cyanium/ui";
-import { StatusBadge } from "@cyanium/kits/patterns";
-import { Info, MoreHorizontal, Search, Sparkles } from "lucide-react";
+  AccordionPreview,
+  AlertPreview,
+  AvatarPreview,
+  BadgePreview,
+  BannerPreview,
+  BrandMarkPreview,
+  BreadcrumbPreview,
+  ButtonPreview,
+  CardPreview,
+  CheckboxPreview,
+  DataTablePreview,
+  DropdownPreview,
+  EmptyStatePreview,
+  EyebrowPreview,
+  FaqListPreview,
+  FeatureCardPreview,
+  IconPreview,
+  InputPreview,
+  KbdPreview,
+  ModalPreview,
+  PaginationPreview,
+  PanelPreview,
+  ProgressBarPreview,
+  RadioGroupPreview,
+  SearchFieldPreview,
+  SectionHeadPreview,
+  SegmentedControlPreview,
+  SelectPreview,
+  SeparatorPreview,
+  SkeletonPreview,
+  SliderPreview,
+  SwitchPreview,
+  TabsPreview,
+  TagPreview,
+  TextareaPreview,
+  TooltipPreview,
+  TypographyPreview,
+} from "./previews";
 
 export type GalleryCategory =
   | "Atoms"
@@ -45,6 +47,11 @@ export type GalleryCategory =
   | "Data"
   | "Patterns";
 
+export interface GalleryPropDoc {
+  name: string;
+  description: string;
+}
+
 export interface GalleryEntry {
   id: string;
   name: string;
@@ -52,321 +59,16 @@ export interface GalleryEntry {
   description: string;
   importLine: string;
   usage: string;
+  props?: GalleryPropDoc[];
   Preview: ComponentType;
 }
 
-function ButtonPreview() {
-  return (
-    <div className="flex flex-wrap gap-2">
-      <Button intent="primary">Primary</Button>
-      <Button intent="neutral" variant="stroke">
-        Neutral
-      </Button>
-      <Button intent="error" variant="lighter">
-        Error
-      </Button>
-      <Button iconOnly intent="neutral" variant="stroke" aria-label="Search">
-        <Search className="size-5" />
-      </Button>
-    </div>
-  );
-}
-
-function BadgePreview() {
-  return (
-    <div className="flex flex-wrap items-center gap-2">
-      <Badge color="green" dot>
-        Active
-      </Badge>
-      <Badge color="blue" variant="filled">
-        Pro
-      </Badge>
-      <Badge color="orange" variant="lighter">
-        Pending
-      </Badge>
-      <Badge color="gray">Default</Badge>
-    </div>
-  );
-}
-
-function TagPreview() {
-  return (
-    <div className="flex flex-wrap gap-2">
-      <Tag>Design System</Tag>
-      <Tag gray>Neutral</Tag>
-      <Tag onRemove={() => undefined}>Removable</Tag>
-    </div>
-  );
-}
-
-function AvatarPreview() {
-  return (
-    <div className="flex items-center gap-4">
-      <Avatar name="Alex Morgan" color="blue" status="online" />
-      <Avatar name="Sam Lee" color="green" />
-      <Avatar name="Jordan" color="orange" size={48} />
-    </div>
-  );
-}
-
-function SwitchPreview() {
-  return (
-    <div className="flex items-center gap-4">
-      <Switch defaultChecked />
-      <Switch />
-      <Label>Enable notifications</Label>
-    </div>
-  );
-}
-
-function CheckboxPreview() {
-  return (
-    <div className="flex flex-col gap-3">
-      <Checkbox label="Remember me" defaultChecked />
-      <CheckboxControl defaultChecked />
-      <Checkbox label="Marketing emails" />
-    </div>
-  );
-}
-
-function InputPreview() {
-  return (
-    <div className="w-full max-w-sm space-y-4">
-      <Input label="Email" placeholder="you@company.com" hint="We'll never share your email." />
-      <Input label="Password" type="password" placeholder="••••••••" />
-    </div>
-  );
-}
-
-function SelectPreview() {
-  return (
-    <div className="w-full max-w-sm">
-      <Select
-        label="Country"
-        placeholder="Select…"
-        options={[
-          { value: "us", label: "United States" },
-          { value: "uk", label: "United Kingdom" },
-          { value: "ca", label: "Canada" },
-        ]}
-      />
-    </div>
-  );
-}
-
-function TextareaPreview() {
-  return (
-    <div className="w-full max-w-sm">
-      <Textarea label="Notes" showCounter maxLength={120} defaultValue="Hello from Cyanium." />
-    </div>
-  );
-}
-
-function SliderPreview() {
-  return (
-    <div className="w-full max-w-sm">
-      <Slider defaultValue={[40]} max={100} step={1} />
-    </div>
-  );
-}
-
-function AlertPreview() {
-  return (
-    <div className="w-full max-w-lg space-y-3">
-      <Alert status="info" title="Heads up">
-        You can adjust your limit anytime.
-      </Alert>
-      <Alert status="success" title="Saved">
-        Your changes were saved successfully.
-      </Alert>
-      <Alert status="error" title="Error">
-        Something went wrong. Try again.
-      </Alert>
-    </div>
-  );
-}
-
-function BannerPreview() {
-  return (
-    <Banner color="blue" icon={<Sparkles className="size-4" />}>
-      New features are available in this release.
-    </Banner>
-  );
-}
-
-function ProgressBarPreview() {
-  return (
-    <div className="w-full max-w-sm">
-      <ProgressBar value={68} showValue label="Weekly limit" />
-    </div>
-  );
-}
-
-function ModalPreview() {
-  const [open, setOpen] = useState(false);
-  return (
-    <div>
-      <Button onClick={() => setOpen(true)}>Open modal</Button>
-      <Modal
-        open={open}
-        onOpenChange={setOpen}
-        title="Adjust limit"
-        description="Set a new weekly spending cap."
-        icon={<Info className="size-5" />}
-        footer={
-          <>
-            <Button variant="stroke" intent="neutral" onClick={() => setOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={() => setOpen(false)}>Save</Button>
-          </>
-        }
-      >
-        Changes take effect immediately.
-      </Modal>
-    </div>
-  );
-}
-
-function DropdownPreview() {
-  return (
-    <Dropdown
-      trigger={
-        <Button variant="stroke" intent="neutral" iconOnly aria-label="Menu">
-          <MoreHorizontal className="size-5" />
-        </Button>
-      }
-      items={[
-        { label: "Edit", onClick: () => undefined },
-        { type: "separator" },
-        { label: "Delete", danger: true, onClick: () => undefined },
-      ]}
-    />
-  );
-}
-
-function TooltipPreview() {
-  return (
-    <TooltipProvider>
-      <Tooltip content="Adjust spending limit">
-        <Button variant="stroke" intent="neutral">
-          Hover me
-        </Button>
-      </Tooltip>
-    </TooltipProvider>
-  );
-}
-
-function CardPreview() {
-  return (
-    <Card raised padding="lg" className="max-w-sm">
-      <CardHeader>
-        <CardTitle>Card surface</CardTitle>
-        <CardDescription>White fill + keyline + soft radius.</CardDescription>
-      </CardHeader>
-      <CardContent className="pt-2">
-        <Text size="sm" className="text-text-sub">
-          Composable card primitives for dashboards and settings.
-        </Text>
-      </CardContent>
-    </Card>
-  );
-}
-
-function TabsPreview() {
-  return (
-    <Tabs
-      defaultValue="one"
-      items={[
-        { value: "one", label: "Overview", badge: 3 },
-        { value: "two", label: "Settings" },
-      ]}
-    >
-      <TabsContent value="one" className="pt-4 text-sm text-text-sub">
-        Panel one content
-      </TabsContent>
-      <TabsContent value="two" className="pt-4 text-sm text-text-sub">
-        Panel two content
-      </TabsContent>
-    </Tabs>
-  );
-}
-
-function DataTablePreview() {
-  const [selected, setSelected] = useState(new Set<string>());
-  const data = [
-    { id: "1", name: "Netflix", status: "completed" as const, amount: "-$15.99" },
-    { id: "2", name: "Salary", status: "pending" as const, amount: "+$5,200" },
-    { id: "3", name: "Spotify", status: "completed" as const, amount: "-$9.99" },
-  ];
-  return (
-    <DataTable
-      columns={[
-        { id: "name", header: "Name", cell: (r) => r.name },
-        { id: "status", header: "Status", cell: (r) => <StatusBadge status={r.status} /> },
-        {
-          id: "amount",
-          header: "Amount",
-          cell: (r) => r.amount,
-          className: "text-right font-semibold",
-        },
-      ]}
-      data={data}
-      getRowId={(r) => r.id}
-      selectable
-      selectedIds={selected}
-      onSelectionChange={setSelected}
-    />
-  );
-}
-
-function AccordionPreview() {
-  return (
-    <FaqList
-      items={[
-        { value: "a", question: "What is Cyanium?", answer: "A production design system for React." },
-        { value: "b", question: "Radix or native?", answer: "Radix primitives with Cyanium tokens." },
-      ]}
-    />
-  );
-}
-
-function KbdPreview() {
-  return (
-    <div className="flex items-center gap-2">
-      <Kbd>⌘</Kbd>
-      <Kbd>K</Kbd>
-      <Text size="sm" className="text-text-sub">
-        Quick search
-      </Text>
-    </div>
-  );
-}
-
-function SkeletonPreview() {
-  return (
-    <div className="flex items-center gap-4">
-      <Skeleton className="size-10 rounded-full" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-32" />
-        <Skeleton className="h-3 w-24" />
-      </div>
-    </div>
-  );
-}
-
-function EmptyStatePreview() {
-  return (
-    <EmptyState
-      title="No transactions"
-      description="When you make transactions they will show up here."
-    />
-  );
-}
-
-function PaginationPreview() {
-  return <Pagination total={12} page={3} />;
-}
+const commonFieldProps: GalleryPropDoc[] = [
+  { name: "label", description: "Visible field label (wraps control in Field)." },
+  { name: "hint", description: "Helper text below the control." },
+  { name: "error", description: "Error state — red keyline and hint color." },
+  { name: "disabled", description: "Non-interactive, muted styling." },
+];
 
 export const galleryCatalog: GalleryEntry[] = [
   {
@@ -375,7 +77,15 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Atoms",
     description: "Primary actions with intent, variant, and size options.",
     importLine: 'import { Button } from "@cyanium/ui";',
-    usage: "Use intent for semantic color (primary, neutral, error). Variants: filled, stroke, lighter, ghost.",
+    usage: "intent: primary | neutral | error. variant: filled | stroke | lighter | ghost. size: xsmall | small | medium | large.",
+    props: [
+      { name: "intent", description: "Semantic color family." },
+      { name: "variant", description: "Visual weight within an intent." },
+      { name: "size", description: "Height and padding scale." },
+      { name: "leadingIcon / trailingIcon", description: "Optional lucide icons." },
+      { name: "iconOnly", description: "Square icon button — pass icon as children." },
+      { name: "disabled", description: "Muted, non-interactive." },
+    ],
     Preview: ButtonPreview,
   },
   {
@@ -384,7 +94,13 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Atoms",
     description: "Compact status labels with color and dot variants.",
     importLine: 'import { Badge } from "@cyanium/ui";',
-    usage: "Pair color with variant (filled, lighter) for hierarchy on dense dashboards.",
+    usage: "color: green | blue | orange | red | gray. variant: filled | lighter. dot for presence indicators.",
+    props: [
+      { name: "color", description: "Semantic palette slot." },
+      { name: "variant", description: "filled or lighter background." },
+      { name: "dot", description: "Leading status dot." },
+      { name: "size", description: "small for dense tables." },
+    ],
     Preview: BadgePreview,
   },
   {
@@ -393,7 +109,11 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Atoms",
     description: "Inline labels for metadata, filters, and removable chips.",
     importLine: 'import { Tag } from "@cyanium/ui";',
-    usage: "Pass onRemove for dismissible tags in filter bars.",
+    usage: "Pass onRemove for dismissible tags. gray for neutral metadata.",
+    props: [
+      { name: "gray", description: "Neutral styling (boolean prop on component)." },
+      { name: "onRemove", description: "Shows dismiss control when set." },
+    ],
     Preview: TagPreview,
   },
   {
@@ -402,8 +122,59 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Atoms",
     description: "User initials with optional status indicator.",
     importLine: 'import { Avatar } from "@cyanium/ui";',
-    usage: "Set status to online, offline, or busy for presence in nav and lists.",
+    usage: "name drives initials. status: online | offline | busy.",
+    props: [
+      { name: "name", description: "Generates initials and aria label." },
+      { name: "color", description: "Background hue from token palette." },
+      { name: "size", description: "Pixel diameter (default 40)." },
+      { name: "status", description: "Presence badge overlay." },
+    ],
     Preview: AvatarPreview,
+  },
+  {
+    id: "icon",
+    name: "Icon",
+    category: "Atoms",
+    description: "Sized wrapper for lucide icons in nav and lists.",
+    importLine: 'import { Icon } from "@cyanium/ui";',
+    usage: "Wrap lucide icons. size: xs | sm | md | lg. muted for tertiary color.",
+    props: [
+      { name: "size", description: "xs through lg — scales child svg." },
+      { name: "muted", description: "Uses text-icon-soft." },
+    ],
+    Preview: IconPreview,
+  },
+  {
+    id: "brand-mark",
+    name: "BrandMark",
+    category: "Atoms",
+    description: "Cyanium logomark with brand orange treatment.",
+    importLine: 'import { BrandMark } from "@cyanium/ui";',
+    usage: "Pass size in px for app chrome and marketing headers.",
+    props: [{ name: "size", description: "Width and height in pixels (default 40)." }],
+    Preview: BrandMarkPreview,
+  },
+  {
+    id: "typography",
+    name: "Typography",
+    category: "Atoms",
+    description: "Heading, Text, and Subheading scale components.",
+    importLine: 'import { Heading, Text, Subheading } from "@cyanium/ui";',
+    usage: "Heading level h1–h6. Text size sm | md | lg. Subheading for stat labels.",
+    props: [
+      { name: "Heading level", description: "h1–h6 maps to title scale." },
+      { name: "Text size", description: "Paragraph sm | md | lg." },
+    ],
+    Preview: TypographyPreview,
+  },
+  {
+    id: "separator",
+    name: "Separator",
+    category: "Atoms",
+    description: "Horizontal or vertical divider.",
+    importLine: 'import { Separator } from "@cyanium/ui";',
+    usage: "orientation: horizontal | vertical.",
+    Preview: SeparatorPreview,
   },
   {
     id: "switch",
@@ -411,7 +182,12 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Atoms",
     description: "Toggle control for boolean settings.",
     importLine: 'import { Switch } from "@cyanium/ui";',
-    usage: "Use with Label for accessible toggle groups in settings panels.",
+    usage: "Controlled or defaultChecked. size: small | medium.",
+    props: [
+      { name: "checked / onCheckedChange", description: "Controlled mode." },
+      { name: "size", description: "small | medium." },
+      { name: "disabled", description: "Non-interactive." },
+    ],
     Preview: SwitchPreview,
   },
   {
@@ -420,35 +196,72 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Atoms",
     description: "Checkbox field and bare control for forms.",
     importLine: 'import { Checkbox, CheckboxControl } from "@cyanium/ui";',
-    usage: "Checkbox wraps label + control; CheckboxControl is the bare Radix primitive.",
+    usage: "Checkbox adds label. CheckboxControl is the bare Radix primitive.",
+    props: [
+      { name: "label", description: "Optional inline label." },
+      { name: "defaultChecked / checked", description: "Selection state." },
+      { name: "indeterminate", description: "Partial selection (CheckboxControl)." },
+    ],
     Preview: CheckboxPreview,
+  },
+  {
+    id: "radio-group",
+    name: "RadioGroup",
+    category: "Atoms",
+    description: "Single-select radio list with labeled items.",
+    importLine: 'import { RadioGroup, Radio } from "@cyanium/ui";',
+    usage: "Wrap Radio items. defaultValue or value for selection.",
+    props: [
+      { name: "value / onValueChange", description: "Controlled selection." },
+      { name: "Radio label", description: "Optional per-item label." },
+    ],
+    Preview: RadioGroupPreview,
   },
   {
     id: "kbd",
     name: "Kbd",
     category: "Atoms",
-    description: "Keyboard shortcut display for command palettes and hints.",
+    description: "Keyboard shortcut display.",
     importLine: 'import { Kbd } from "@cyanium/ui";',
-    usage: "Compose multiple Kbd elements for chord shortcuts like ⌘K.",
+    usage: "Compose multiple Kbd elements for chord shortcuts.",
     Preview: KbdPreview,
   },
   {
     id: "skeleton",
     name: "Skeleton",
     category: "Atoms",
-    description: "Loading placeholder for text and avatar shapes.",
+    description: "Loading placeholder shapes.",
     importLine: 'import { Skeleton } from "@cyanium/ui";',
-    usage: "Match skeleton dimensions to the content they replace to avoid layout shift.",
+    usage: "Match dimensions to content being loaded.",
     Preview: SkeletonPreview,
   },
   {
     id: "input",
     name: "Input",
     category: "Forms",
-    description: "Labeled text field with hint and error support.",
+    description: "Labeled text field with hint, error, and icon slots.",
     importLine: 'import { Input } from "@cyanium/ui";',
-    usage: "Label, hint, and error props keep form copy co-located with the control.",
+    usage: "inputSize: small | medium | large. leadingIcon / trailingIcon for adornments.",
+    props: [
+      ...commonFieldProps,
+      { name: "inputSize", description: "small | medium | large height." },
+      { name: "leadingIcon / trailingIcon", description: "Icon adornments." },
+      { name: "required", description: "Shows asterisk on label." },
+    ],
     Preview: InputPreview,
+  },
+  {
+    id: "search-field",
+    name: "SearchField",
+    category: "Forms",
+    description: "Input preset with search icon and optional shortcut badge.",
+    importLine: 'import { SearchField } from "@cyanium/ui";',
+    usage: "shortcut defaults to ⌘K. Inherits Input props except leadingIcon.",
+    props: [
+      { name: "shortcut", description: "Kbd badge on the right (set empty to hide)." },
+      { name: "placeholder", description: "Input placeholder text." },
+    ],
+    Preview: SearchFieldPreview,
   },
   {
     id: "select",
@@ -456,7 +269,14 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Forms",
     description: "Dropdown select with label and options array.",
     importLine: 'import { Select } from "@cyanium/ui";',
-    usage: "Pass options as { value, label } pairs. Use placeholder for empty state.",
+    usage: "options: { value, label, disabled? }[]. Chevron aligns to the trailing edge.",
+    props: [
+      ...commonFieldProps,
+      { name: "options", description: "Array of { value, label }." },
+      { name: "placeholder", description: "Empty-state label." },
+      { name: "value / onValueChange", description: "Controlled selection." },
+      { name: "leadingIcon", description: "Optional leading adornment." },
+    ],
     Preview: SelectPreview,
   },
   {
@@ -465,7 +285,12 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Forms",
     description: "Multi-line input with optional character counter.",
     importLine: 'import { Textarea } from "@cyanium/ui";',
-    usage: "Enable showCounter with maxLength for comment and note fields.",
+    usage: "showCounter + maxLength for comment fields.",
+    props: [
+      ...commonFieldProps,
+      { name: "showCounter", description: "Shows length / maxLength." },
+      { name: "maxLength", description: "Character limit for counter." },
+    ],
     Preview: TextareaPreview,
   },
   {
@@ -474,52 +299,89 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Forms",
     description: "Range input for numeric settings.",
     importLine: 'import { Slider } from "@cyanium/ui";',
-    usage: "Controlled via value/onValueChange or defaultValue for uncontrolled use.",
+    usage: "Radix slider — value array, min, max, step.",
+    props: [
+      { name: "value / onValueChange", description: "Controlled value (number[])." },
+      { name: "disabled", description: "Non-interactive track." },
+    ],
     Preview: SliderPreview,
+  },
+  {
+    id: "segmented-control",
+    name: "SegmentedControl",
+    category: "Forms",
+    description: "Mutually exclusive pill toggle group.",
+    importLine: 'import { SegmentedControl } from "@cyanium/ui";',
+    usage: "items: { value, label, icon?, disabled? }[].",
+    props: [
+      { name: "items", description: "Segment definitions." },
+      { name: "value / onChange", description: "Active segment." },
+    ],
+    Preview: SegmentedControlPreview,
   },
   {
     id: "alert",
     name: "Alert",
     category: "Feedback",
-    description: "Inline status messages for forms and panels.",
+    description: "Inline status messages.",
     importLine: 'import { Alert } from "@cyanium/ui";',
-    usage: "Status drives color: info, success, warning, error. Include a title for scanability.",
+    usage: "status: info | success | warning | error. variant: light | filled | stroke.",
+    props: [
+      { name: "status", description: "Semantic color." },
+      { name: "variant", description: "light | filled | stroke." },
+      { name: "title", description: "Bold headline." },
+      { name: "onClose", description: "Dismiss button." },
+    ],
     Preview: AlertPreview,
   },
   {
     id: "banner",
     name: "Banner",
     category: "Feedback",
-    description: "Page-level announcement bar with icon slot.",
+    description: "Page-level announcement bar.",
     importLine: 'import { Banner } from "@cyanium/ui";',
-    usage: "Place at the top of a section for release notes or maintenance notices.",
+    usage: "color + icon for release notes. onClose for dismissible banners.",
+    props: [
+      { name: "color", description: "blue | orange | green | red | gray." },
+      { name: "onClose", description: "Dismiss handler." },
+    ],
     Preview: BannerPreview,
   },
   {
     id: "progress-bar",
     name: "ProgressBar",
     category: "Feedback",
-    description: "Determinate progress with optional label and value.",
+    description: "Linear or circular determinate progress.",
     importLine: 'import { ProgressBar } from "@cyanium/ui";',
-    usage: "Use showValue for limits, quotas, and upload progress.",
+    usage: "variant: linear | circular. showValue for numeric readout.",
+    props: [
+      { name: "value / max", description: "Progress percentage inputs." },
+      { name: "variant", description: "linear | circular." },
+      { name: "showValue", description: "Shows computed percent." },
+    ],
     Preview: ProgressBarPreview,
   },
   {
     id: "empty-state",
     name: "EmptyState",
     category: "Feedback",
-    description: "Placeholder when a list or table has no data.",
+    description: "Placeholder when a list has no data.",
     importLine: 'import { EmptyState } from "@cyanium/ui";',
-    usage: "Keep copy direct — title + one-line description is enough.",
+    usage: "title + description. Optional action slot.",
     Preview: EmptyStatePreview,
   },
   {
     id: "modal",
     name: "Modal",
     category: "Overlays",
-    description: "Dialog overlay built on Radix Dialog primitives.",
+    description: "Dialog overlay on Radix Dialog.",
     importLine: 'import { Modal } from "@cyanium/ui";',
-    usage: "Control with open/onOpenChange. Footer slot accepts action buttons.",
+    usage: "open / onOpenChange. footer slot for actions.",
+    props: [
+      { name: "open / onOpenChange", description: "Visibility control." },
+      { name: "title / description", description: "Header copy." },
+      { name: "footer", description: "Action button row." },
+    ],
     Preview: ModalPreview,
   },
   {
@@ -528,7 +390,7 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Overlays",
     description: "Action menu with separators and danger items.",
     importLine: 'import { Dropdown } from "@cyanium/ui";',
-    usage: "Pass trigger as a Button or icon button. Items support onClick handlers.",
+    usage: "Pass trigger element. items support icon, shortcut, danger.",
     Preview: DropdownPreview,
   },
   {
@@ -537,17 +399,35 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Overlays",
     description: "Contextual hint on hover or focus.",
     importLine: 'import { Tooltip, TooltipProvider } from "@cyanium/ui";',
-    usage: "Wrap the app or section in TooltipProvider once. Keep content under one line.",
+    usage: "Wrap section in TooltipProvider once.",
     Preview: TooltipPreview,
   },
   {
     id: "card",
     name: "Card",
     category: "Data",
-    description: "Composable surface for grouped content.",
+    description: "Composable inset surface for grouped content.",
     importLine: 'import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@cyanium/ui";',
-    usage: "Use raised + padding props for dashboard tiles. Compose header and content slots.",
+    usage: "raised for elevation. padding: none | md | lg.",
+    props: [
+      { name: "raised", description: "Adds shadow-sm." },
+      { name: "padding", description: "none | md | lg." },
+    ],
     Preview: CardPreview,
+  },
+  {
+    id: "panel",
+    name: "Panel",
+    category: "Data",
+    description: "Card with title row, icon, and action slot.",
+    importLine: 'import { Panel } from "@cyanium/ui";',
+    usage: "Used in finance kit dashboards.",
+    props: [
+      { name: "title", description: "Header label." },
+      { name: "icon", description: "Leading icon in title row." },
+      { name: "action", description: "Trailing header slot." },
+    ],
+    Preview: PanelPreview,
   },
   {
     id: "tabs",
@@ -555,8 +435,21 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Data",
     description: "Tabbed navigation with optional badges.",
     importLine: 'import { Tabs, TabsContent } from "@cyanium/ui";',
-    usage: "Pass items array for triggers. TabsContent children map to panel bodies.",
+    usage: "variant: line | pill. items array for triggers.",
+    props: [
+      { name: "variant", description: "line (underline) or pill." },
+      { name: "items", description: "{ value, label, badge? }[]." },
+    ],
     Preview: TabsPreview,
+  },
+  {
+    id: "breadcrumb",
+    name: "Breadcrumb",
+    category: "Data",
+    description: "Hierarchy navigation trail.",
+    importLine: 'import { Breadcrumb } from "@cyanium/ui";',
+    usage: "items: { label, href?, onClick? }[].",
+    Preview: BreadcrumbPreview,
   },
   {
     id: "data-table",
@@ -564,26 +457,62 @@ export const galleryCatalog: GalleryEntry[] = [
     category: "Data",
     description: "Selectable table with typed columns.",
     importLine: 'import { DataTable } from "@cyanium/ui";',
-    usage: "Define columns with id, header, and cell renderers. Use getRowId for selection.",
+    usage: "columns with cell renderers. selectable + selectedIds for bulk actions.",
     Preview: DataTablePreview,
   },
   {
     id: "accordion",
     name: "Accordion",
     category: "Data",
-    description: "Expandable FAQ-style list (FaqList).",
-    importLine: 'import { FaqList } from "@cyanium/ui";',
-    usage: "Items need value, question, and answer. One panel open at a time by default.",
+    description: "Low-level expandable sections (Radix).",
+    importLine: 'import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@cyanium/ui";',
+    usage: "type single + collapsible for FAQ-style panels.",
     Preview: AccordionPreview,
+  },
+  {
+    id: "faq-list",
+    name: "FaqList",
+    category: "Data",
+    description: "Opinionated FAQ accordion preset.",
+    importLine: 'import { FaqList } from "@cyanium/ui";',
+    usage: "items: { value, question, answer }[].",
+    Preview: FaqListPreview,
   },
   {
     id: "pagination",
     name: "Pagination",
     category: "Data",
-    description: "Page controls for long lists and tables.",
+    description: "Page controls for long lists.",
     importLine: 'import { Pagination } from "@cyanium/ui";',
-    usage: "Pass total page count and current page. Wire onPageChange for navigation.",
+    usage: "total page count + current page.",
     Preview: PaginationPreview,
+  },
+  {
+    id: "eyebrow",
+    name: "Eyebrow",
+    category: "Patterns",
+    description: "Section kicker with primary dot.",
+    importLine: 'import { Eyebrow } from "@cyanium/ui";',
+    usage: "Pairs with SectionHead in marketing layouts.",
+    Preview: EyebrowPreview,
+  },
+  {
+    id: "section-head",
+    name: "SectionHead",
+    category: "Patterns",
+    description: "Eyebrow + title + subtitle block.",
+    importLine: 'import { SectionHead } from "@cyanium/ui";',
+    usage: "align: center | left.",
+    Preview: SectionHeadPreview,
+  },
+  {
+    id: "feature-card",
+    name: "FeatureCard",
+    category: "Patterns",
+    description: "Icon + title + description marketing tile.",
+    importLine: 'import { FeatureCard } from "@cyanium/ui";',
+    usage: "Used in landing kit feature grids.",
+    Preview: FeatureCardPreview,
   },
 ];
 

@@ -50,8 +50,10 @@ export function Select({
           className,
         )}
       >
-        {leadingIcon ? <span className={controlIconLeading}>{leadingIcon}</span> : null}
-        <SelectPrimitive.Value placeholder={placeholder} className="min-w-0 flex-1 truncate text-left leading-5" />
+        <span className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden text-left">
+          {leadingIcon ? <span className={controlIconLeading}>{leadingIcon}</span> : null}
+          <SelectPrimitive.Value placeholder={placeholder} className="truncate leading-5" />
+        </span>
         <SelectPrimitive.Icon asChild>
           <ChevronDown className="size-4 shrink-0 text-icon-soft" />
         </SelectPrimitive.Icon>

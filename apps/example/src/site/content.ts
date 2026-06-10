@@ -3,7 +3,7 @@ export const RELEASE_URL = "https://github.com/codyrobertson/cyanium-design-syst
 
 export const siteStats = [
   { num: "36", label: "Primitives" },
-  { num: "24", label: "Gallery" },
+  { num: "37", label: "Gallery" },
   { num: "3", label: "Kits" },
   { num: "6", label: "Doc pages" },
 ] as const;
