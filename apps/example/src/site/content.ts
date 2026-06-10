@@ -2,32 +2,28 @@ export const REPO_URL = "https://github.com/codyrobertson/cyanium-design-system"
 export const RELEASE_URL = "https://github.com/codyrobertson/cyanium-design-system/releases/tag/v0.1.0";
 
 export const siteStats = [
-  { num: "36", label: "primitives" },
-  { num: "24", label: "gallery entries" },
-  { num: "3", label: "product kits" },
-  { num: "6", label: "doc pages" },
+  { num: "36", label: "Primitives" },
+  { num: "24", label: "Gallery" },
+  { num: "3", label: "Kits" },
+  { num: "6", label: "Doc pages" },
 ] as const;
 
-export const manifest = [
+export const systemFeatures = [
   {
-    index: "01",
-    title: "Tokens first",
-    body: "Semantic CSS variables and a Tailwind v4 theme — one source of truth for color, type, motion, and elevation.",
+    title: "@cyanium/tokens",
+    description: "Semantic CSS variables and Tailwind v4 theme — color, type, motion, elevation.",
   },
   {
-    index: "02",
-    title: "Primitives that compose",
-    body: "Radix behavior, shadcn patterns, CVA variants. Copy via registry or install the package.",
+    title: "@cyanium/ui",
+    description: "Radix primitives with inset surfaces, CVA variants, and shadcn-style composition.",
   },
   {
-    index: "03",
-    title: "Kits with contracts",
-    body: "Finance, landing, and AI surfaces ship with explicit props and fixture builders — no mystery globals.",
+    title: "@cyanium/kits",
+    description: "Finance, landing, and AI layouts with explicit props and fixture builders.",
   },
   {
-    index: "04",
-    title: "Proof in the repo",
-    body: "Gallery, docs, Storybook, and CI checks for registry drift and CSS coverage. You see what ships.",
+    title: "Registry + CI",
+    description: "shadcn copy path with drift checks and CSS coverage guards in CI.",
   },
 ] as const;
 
@@ -55,43 +51,37 @@ export const liveKits = [
   {
     id: "finance" as const,
     label: "Finance",
-    index: "01",
     tag: "Dashboard",
-    description: "Cards, budget chart, spending breakdown, transaction table.",
-    tone: "orange",
+    description: "Sidebar shell, cards, budget chart, spending, transactions.",
   },
   {
     id: "ai" as const,
     label: "AI Chat",
-    index: "02",
     tag: "Assistant",
-    description: "Sidebar threads, message bubbles, model picker, composer.",
-    tone: "indigo",
+    description: "Thread sidebar, bubbles, model picker, composer.",
   },
   {
     id: "landing" as const,
     label: "Landing",
-    index: "03",
     tag: "Marketing",
-    description: "Hero, pricing tiers, FAQ, testimonials — all prop-driven.",
-    tone: "cyan",
+    description: "Hero, features, pricing, FAQ — all prop-driven.",
   },
 ] as const;
 
 export const siteFaq = [
   {
     value: "1",
-    question: "What ships in the box?",
-    answer: "Tokens, UI primitives, three product kits, an in-app gallery and docs, Storybook, fixture builders, and a shadcn registry with CI drift checks.",
+    question: "What ships in the repo?",
+    answer: "Tokens, UI primitives, three product kits, gallery, docs, Storybook, fixture builders, and a shadcn registry with CI checks.",
   },
   {
     value: "2",
     question: "How do live demos work?",
-    answer: "Pick a kit — it mounts in this app. Toggle Demo vs Integration to compare wrapper demos with build*AppProps() wiring.",
+    answer: "Open a kit from the home page. Toggle Demo vs Integration in the bottom bar to compare wrapper demos with build*AppProps() wiring.",
   },
   {
     value: "3",
     question: "Can I copy components only?",
-    answer: "Yes. Use the shadcn registry for primitives. Kits stay npm packages — they depend on patterns and fixtures.",
+    answer: "Yes — use the shadcn registry for primitives. Kits stay npm packages and depend on patterns and fixtures.",
   },
 ] as const;

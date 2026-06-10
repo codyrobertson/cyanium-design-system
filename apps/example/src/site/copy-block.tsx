@@ -57,8 +57,8 @@ export function CopyBlock({ command, variant = "dark" }: CopyBlockProps) {
       <pre
         className={
           isDark
-            ? "site-code overflow-x-auto p-4 text-[13px] leading-relaxed text-white/90"
-            : "site-code overflow-x-auto p-4 text-[13px] leading-relaxed text-text-strong"
+            ? "overflow-x-auto p-4 font-mono text-[13px] leading-relaxed text-white/90"
+            : "overflow-x-auto p-4 font-mono text-[13px] leading-relaxed text-text-strong"
         }
       >
         <code>{command}</code>

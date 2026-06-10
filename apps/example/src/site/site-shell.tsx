@@ -1,9 +1,8 @@
 import type { ReactNode } from "react";
 import { Github } from "lucide-react";
-import { Button, cn } from "@cyanium/ui";
+import { BrandMark, Button, cn } from "@cyanium/ui";
 import { REPO_URL } from "./content";
 import { navigateTo, type AppView } from "./navigation";
-import "./site.css";
 
 export interface SiteShellProps {
   active: "gallery" | "docs";
@@ -18,9 +17,7 @@ function SiteLogo({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       className="inline-flex items-center gap-2.5 font-display text-[15px] font-semibold tracking-tight text-text-strong transition-colors hover:text-primary"
     >
-      <span className="relative inline-flex size-8 items-center justify-center rounded-[10px] bg-gradient-to-br from-[var(--blue-400)] to-[var(--blue-600)] shadow-[0_0_0_1px_rgba(255,255,255,0.12)_inset,0_8px_20px_-6px_rgba(59,130,246,0.55)]">
-        <span className="size-3 rounded-[3px] bg-white/90" />
-      </span>
+      <BrandMark size={32} />
       Cyanium
     </button>
   );
@@ -34,7 +31,7 @@ const topNav: { id: AppView | "gallery" | "docs"; label: string; hash: string }[
 
 export function SiteShell({ active, sidebar, children }: SiteShellProps) {
   return (
-    <div className="site-root flex min-h-screen flex-col bg-bg-white">
+    <div className="flex min-h-screen flex-col bg-bg-white">
       <header className="sticky top-0 z-40 border-b border-stroke-soft bg-bg-white/95 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <SiteLogo onClick={() => navigateTo({ view: "home" })} />
