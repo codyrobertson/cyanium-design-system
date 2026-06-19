@@ -36,7 +36,7 @@
     "Tabs": { "cardMode": "column" },
     "Text": { "cardMode": "column" },
     "Textarea": { "cardMode": "column" },
-    "FinanceApp": { "cardMode": "single", "viewport": "1200x800" },
+    "FinanceApp": { "cardMode": "single", "viewport": "1440x900" },
     "AiChatApp": { "cardMode": "single", "viewport": "1200x800" },
     "LandingPage": { "cardMode": "single", "viewport": "1200x600" },
     "MarketingShell": { "cardMode": "single", "viewport": "1200x600" }
