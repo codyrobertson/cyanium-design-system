@@ -1,0 +1,15 @@
+/* Deterministic compiled stylesheet for the Cyanium design system.
+   Imports the UI package's Tailwind v4 entry (which scans packages/ui/src)
+   and adds a @source scan for the kits package so kit utilities ship too.
+   Compiled via: npx @tailwindcss/cli -i .design-sync/css-entry.css -o .design-sync/compiled.css */
+@import "../packages/ui/src/styles.css";
+@source "../packages/kits/src/**/*.{ts,tsx}";
+
+/* Badge builds color classes by string interpolation (bg-[var(--${color}-NNN)]),
+   which Tailwind's static scanner can't see. Force-generate the full matrix so
+   every Badge color × variant renders. Colors: blue/orange/red/green/yellow/
+   purple/sky/pink/teal; shades used: 50 (lighter fill), 200 (light fill +
+   stroke inset), 500 (filled), 600 (lighter/stroke text), 900 (light text). */
+@source inline("bg-[var(--{blue,orange,red,green,yellow,purple,sky,pink,teal}-{50,200,500})]");
+@source inline("text-[var(--{blue,orange,red,green,yellow,purple,sky,pink,teal}-{600,900})]");
+@source inline("shadow-[inset_0_0_0_1px_var(--{blue,orange,red,green,yellow,purple,sky,pink,teal}-200)]");
