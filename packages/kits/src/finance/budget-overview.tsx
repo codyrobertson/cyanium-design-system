@@ -25,15 +25,28 @@ export interface BudgetOverviewProps extends React.HTMLAttributes<HTMLDivElement
   maxScale?: number;
 }
 
+const SERIES = [
+  { key: "income", label: "Income", color: "var(--blue-500)" },
+  { key: "expenses", label: "Expenses", color: "var(--sky-400)" },
+  { key: "scheduled", label: "Scheduled", color: "var(--purple-500)" },
+] as const;
+
 export function BudgetOverview({
   periodLabel,
   stats,
   chartMonths,
   chartData,
-  maxScale = 20,
+  maxScale,
   className,
   ...props
 }: BudgetOverviewProps) {
+  // Grouped bars compare the three series per month, so the axis is scaled to
+  // the largest single value (not their sum) and rounded up to a clean tick.
+  const dataMax = Math.max(1, ...chartData.flatMap((d) => [d.income, d.expenses, d.scheduled]));
+  const axisMax = maxScale ?? Math.max(3, Math.ceil(dataMax / 3) * 3);
+  const ticks = [axisMax, (axisMax * 2) / 3, axisMax / 3, 0];
+  const fmt = (n: number) => `${Number.isInteger(n) ? n : n.toFixed(1)}k`;
+
   return (
     <Panel
       title="Budget Overview"
@@ -47,9 +60,9 @@ export function BudgetOverview({
       {...props}
     >
       <div className="mb-4 flex flex-wrap items-center gap-4 text-sm text-text-sub">
-        <Legend color="var(--blue-500)" label="Income" />
-        <Legend color="var(--sky-400)" label="Expenses" />
-        <Legend color="var(--purple-500)" label="Scheduled" />
+        {SERIES.map((s) => (
+          <Legend key={s.key} color={s.color} label={s.label} />
+        ))}
       </div>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         <StatCard icon={<ArrowDownLeft className="size-4" />} label="Income" value={stats.income.value} delta={stats.income.delta} deltaColor="green" />
@@ -57,25 +70,32 @@ export function BudgetOverview({
         <StatCard icon={<CalendarClock className="size-4" />} label="Scheduled" value={stats.scheduled.value} delta={stats.scheduled.delta} deltaColor="gray" />
       </div>
       <div className="mt-6 flex h-60 gap-3">
-        <div className="flex flex-col justify-between pb-6 font-mono text-[11px] text-text-soft">
-          <span>{maxScale}k</span><span>{maxScale * 0.75}k</span><span>{maxScale * 0.5}k</span><span>0</span>
+        <div className="flex flex-col justify-between pb-6 text-right font-mono text-[11px] tabular-nums text-text-soft">
+          {ticks.map((t) => (
+            <span key={t}>{fmt(t)}</span>
+          ))}
         </div>
-        <div className="flex flex-1 items-end gap-2.5">
-          {chartData.map((d, i) => {
-            const { income, expenses, scheduled } = d;
-            const rest = maxScale - income - expenses - scheduled;
-            return (
-              <div key={chartMonths[i] ?? i} className="flex h-full flex-1 flex-col items-center gap-2">
-                <div className="flex h-[calc(100%-24px)] w-full max-w-[38px] flex-col overflow-hidden rounded-md">
-                  <div className="bg-bg-weak" style={{ height: `${(rest / maxScale) * 100}%` }} />
-                  <div className="bg-[var(--blue-500)]" style={{ height: `${(income / maxScale) * 100}%` }} />
-                  <div className="bg-[var(--sky-400)]" style={{ height: `${(expenses / maxScale) * 100}%` }} />
-                  <div className="bg-[var(--purple-500)]" style={{ height: `${(scheduled / maxScale) * 100}%` }} />
-                </div>
-                <span className="text-xs text-text-soft">{chartMonths[i]}</span>
+        <div className="relative flex flex-1 items-end gap-1.5">
+          {/* gridlines aligned to the axis ticks */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-6 top-0 flex flex-col justify-between">
+            {ticks.map((t) => (
+              <div key={t} className="h-px w-full bg-stroke-soft/70" />
+            ))}
+          </div>
+          {chartData.map((d, i) => (
+            <div key={chartMonths[i] ?? i} className="group relative flex h-full flex-1 flex-col items-center gap-2">
+              <div className="flex h-[calc(100%_-_24px)] w-full items-end justify-center gap-[3px]">
+                {SERIES.map((s) => (
+                  <div
+                    key={s.key}
+                    className="w-1.5 rounded-t-[3px] transition-[height]"
+                    style={{ height: `${(d[s.key] / axisMax) * 100}%`, background: s.color }}
+                  />
+                ))}
               </div>
-            );
-          })}
+              <span className="text-xs text-text-soft">{chartMonths[i]}</span>
+            </div>
+          ))}
         </div>
       </div>
     </Panel>
