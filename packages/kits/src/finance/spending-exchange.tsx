@@ -2,7 +2,7 @@ import * as React from "react";
 import { ArrowLeftRight, ArrowRight, ChevronDown, Info, PieChart, RefreshCw } from "lucide-react";
 import { Button, Panel, cn, insetBorder } from "@cyanium/ui";
 
-export interface SpendingCategory { icon: React.ReactNode; label: string; value: string }
+export interface SpendingCategory { icon: React.ReactNode; label: string; value: string; color?: string }
 
 export interface SpendingSummaryProps extends React.HTMLAttributes<HTMLDivElement> {
   periodLabel: string;
@@ -11,22 +11,24 @@ export interface SpendingSummaryProps extends React.HTMLAttributes<HTMLDivElemen
   limitNote: React.ReactNode;
 }
 
+const SPEND_PALETTE = ["var(--blue-500)", "var(--sky-400)", "var(--purple-500)", "var(--pink-500)", "var(--teal-500)"];
+const toAmount = (s: string) => Number(s.replace(/[^0-9.]/g, "")) || 0;
+
 export function SpendingSummary({ periodLabel, total, categories, limitNote, className, ...props }: SpendingSummaryProps) {
+  const colored = categories.map((c, i) => ({ ...c, color: c.color ?? SPEND_PALETTE[i % SPEND_PALETTE.length] }));
   return (
     <Panel title="Spending Summary" icon={<PieChart className="size-5" />} action={<Button size="small" intent="neutral" variant="stroke" trailingIcon={<ChevronDown className="size-4" />}>{periodLabel}</Button>} className={className} {...props}>
       <div className="mt-4 flex justify-center">
-        <div className="relative flex h-[120px] w-[240px] items-end justify-center overflow-hidden rounded-t-full bg-[var(--blue-500)] shadow-[inset_0_6px_16px_rgba(255,255,255,0.25)]">
-          <div className="pb-1.5 text-center text-white">
-            <div className="text-[11px] font-semibold tracking-widest opacity-85">SPEND</div>
-            <div className="font-display text-[26px] font-semibold tracking-tight">{total}</div>
-          </div>
-        </div>
+        <SpendingDonut total={total} segments={colored.map((c) => ({ value: toAmount(c.value), color: c.color }))} />
       </div>
       <div className="mt-5 grid grid-cols-3 gap-2.5">
-        {categories.map((c) => (
+        {colored.map((c) => (
           <div key={c.label} className={cn("rounded-xl px-1.5 py-3.5 text-center", insetBorder)}>
             <span className="mx-auto mb-2 inline-flex size-8 items-center justify-center rounded-full bg-bg-weak text-icon-sub">{c.icon}</span>
-            <div className="text-xs text-text-sub">{c.label}</div>
+            <div className="flex items-center justify-center gap-1.5 text-xs text-text-sub">
+              <span className="size-2 shrink-0 rounded-full" style={{ background: c.color }} />
+              {c.label}
+            </div>
             <div className="mt-0.5 text-[15px] font-semibold tabular-nums text-text-strong">{c.value}</div>
           </div>
         ))}
@@ -36,6 +38,45 @@ export function SpendingSummary({ periodLabel, total, categories, limitNote, cla
         <Info className="size-4 shrink-0 text-icon-soft" />
       </div>
     </Panel>
+  );
+}
+
+function SpendingDonut({ total, segments }: { total: string; segments: { value: number; color: string }[] }) {
+  const sum = segments.reduce((acc, s) => acc + s.value, 0) || 1;
+  const R = 56;
+  const C = 2 * Math.PI * R;
+  const GAP = 5; // px of track shown between segments
+  let offset = 0;
+  return (
+    <div className="relative flex items-center justify-center">
+      <svg viewBox="0 0 140 140" className="size-[168px] -rotate-90" role="img" aria-label="Spending by category">
+        <circle cx="70" cy="70" r={R} fill="none" stroke="var(--bg-weak)" strokeWidth="14" />
+        {segments.map((s, i) => {
+          const len = (s.value / sum) * C;
+          const dash = Math.max(0, len - GAP);
+          const el = (
+            <circle
+              key={i}
+              cx="70"
+              cy="70"
+              r={R}
+              fill="none"
+              stroke={s.color}
+              strokeWidth="14"
+              strokeLinecap="round"
+              strokeDasharray={`${dash} ${C - dash}`}
+              strokeDashoffset={-offset}
+            />
+          );
+          offset += len;
+          return el;
+        })}
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+        <div className="text-[10px] font-semibold tracking-widest text-text-soft">SPEND</div>
+        <div className="font-display text-[22px] font-semibold tracking-tight tabular-nums text-text-strong">{total}</div>
+      </div>
+    </div>
   );
 }
 
